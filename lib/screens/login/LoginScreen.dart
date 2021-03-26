@@ -23,108 +23,112 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
         body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[Color(0xfF474546), Color(0xfF000000)],
-            ),
-          ),
-          child: Form(
-            key: _formKey,
-            child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 10,
-                              fontSize: 35),
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: TextFormField(
-                        style: TextStyle(color: Color(0xfF0496E2)),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: nameController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          if (value.length < 6) {
-                            return 'Must be more than 6 charater';
-                          } else
-                            return null;
-                        },
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.white70,
-                                width: 3),
-                          ),
-                          labelText: 'User Name',
-                        ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[Color(0xfF474546), Color(0xfF000000)],
+        ),
+      ),
+      child: Form(
+        key: _formKey,
+        child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 10,
+                          fontSize: 35),
+                    )),
+                Container(
+                    alignment: Alignment.center,
+                    width: 140,
+                    height: 140,
+                    padding: EdgeInsets.all(10),
+                    child: Image.asset('images/ehsan.png')),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: TextFormField(
+                    style: TextStyle(color: Color(0xfF0496E2)),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: nameController,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (value.length < 6) {
+                        return 'Must be more than 6 charater';
+                      } else
+                        return null;
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.white70, width: 3),
                       ),
+                      labelText: 'User Name',
                     ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child:
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child:
                       // Obx(()=>
                       TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        // obscureText: !myController.changeDisplayPassword.value,
-                        controller: passwordController,
-                        maxLength: 10,
-                        style: TextStyle(color: Color(0xfF0496E2)),
-                        validator: (value) {
-                          // if (value.isEmpty) {
-                          //   return 'Please enter some text';
-                          // }
-                          // if (value.length < 8) {
-                          //   return 'Must be more than 8 charater';
-                          // } else
-                          //   return null;
-                        },
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.white70,
-                                width: 3),
-                          ),
-                          labelText: 'Password',
-                          // suffixIcon: IconButton(
-                          //     icon: Obx(()=>Icon(
-                          //       // Based on passwordVisible state choose the icon
-                          //       myController.changeDisplayPassword.value
-                          //           ? Icons.visibility
-                          //           : Icons.visibility_off,
-                          //       color: Theme.of(context).primaryColorDark,
-                          //     ),
-                          //     ),
-                          //     onPressed: () {
-                          //       // if(myController.changeDisplayPassword.value==true){
-                          //       //   myController.changeDisplayPassword(false);
-                          //       // }else{
-                          //       //   myController.changeDisplayPassword(true);
-                          //       // }
-                          //     }
-                          //     )
-                        ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    // obscureText: !myController.changeDisplayPassword.value,
+                    controller: passwordController,
+                    maxLength: 10,
+                    style: TextStyle(color: Color(0xfF0496E2)),
+                    validator: (value) {
+                      // if (value.isEmpty) {
+                      //   return 'Please enter some text';
+                      // }
+                      // if (value.length < 8) {
+                      //   return 'Must be more than 8 charater';
+                      // } else
+                      //   return null;
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.white70, width: 3),
                       ),
-                      // ),
+                      labelText: 'Password',
+                      // suffixIcon: IconButton(
+                      //     icon: Obx(()=>Icon(
+                      //       // Based on passwordVisible state choose the icon
+                      //       myController.changeDisplayPassword.value
+                      //           ? Icons.visibility
+                      //           : Icons.visibility_off,
+                      //       color: Theme.of(context).primaryColorDark,
+                      //     ),
+                      //     ),
+                      //     onPressed: () {
+                      //       // if(myController.changeDisplayPassword.value==true){
+                      //       //   myController.changeDisplayPassword(false);
+                      //       // }else{
+                      //       //   myController.changeDisplayPassword(true);
+                      //       // }
+                      //     }
+                      //     )
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
+                  ),
+                  // ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
                     SizedBox(
                       width: 140,
                       height: 40,
@@ -132,14 +136,14 @@ class LoginScreen extends StatelessWidget {
                         child: Text('Login'),
                         style: ButtonStyle(
                             foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
+                                MaterialStateProperty.all<Color>(Colors.white),
                             backgroundColor:
-                            MaterialStateProperty.all<Color>(Color(0xfF0496E2)),
+                                MaterialStateProperty.all<Color>(Color(0xfF0496E2)),
                             shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ))),
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ))),
                         onPressed: () {
                           if (_formKey.currentState.validate() &&
                               !validateUserName() &&
@@ -155,8 +159,7 @@ class LoginScreen extends StatelessWidget {
                               validatePassword()) {
                             // Get.off(TodoList());
 
-                            Get.snackbar(
-                                'Hi Dear $userName', 'Welcome to ToDo App',
+                            Get.snackbar('Hi Dear $userName', 'Welcome to ToDo App',
                                 snackPosition: SnackPosition.BOTTOM,
                                 margin: EdgeInsets.all(8),
                                 colorText: Colors.green,
@@ -166,27 +169,30 @@ class LoginScreen extends StatelessWidget {
                           }
                         },
                       ),
-                    ), Align(
-                      alignment: FractionalOffset.bottomCenter,
-                      child: SizedBox(
-                        width: 140,
-                        height: 30,
-                        child: OutlineButton(
-                          textColor: Colors.white,
-                          color: Colors.blue,
-                          child: Text('Register'),
-                          onPressed: () {},
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          borderSide:
-                          BorderSide(color: Color(0xfF0496E2), width: 2),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: SizedBox(
+                          width: 140,
+                          height: 30,
+                          child: OutlineButton(
+                            textColor: Colors.white,
+                            color: Colors.blue,
+                            child: Text('Register'),
+                            onPressed: () {},
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            borderSide:
+                            BorderSide(color: Color(0xfF0496E2), width: 2),
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                )),
-          ),
-        ));
+              ],
+            )),
+      ),
+    ));
   }
 
   bool validateUserName() {

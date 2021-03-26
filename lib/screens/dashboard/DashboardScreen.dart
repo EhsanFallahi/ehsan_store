@@ -21,9 +21,7 @@ class DashboardScreen extends StatelessWidget {
     final appBar = AppBar(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Theme
-          .of(context)
-          .primaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       // leading: Padding(padding: EdgeInsets.only(left: 15),
       //   child: IconButton(
       //     icon: Icon(Icons.apps_rounded, color: Colors.white,),
@@ -61,59 +59,71 @@ class DashboardScreen extends StatelessWidget {
             Icons.search_rounded,
             color: Colors.white,
           ),
-          backgroundColor: Theme
-              .of(context)
-              .accentColor,
+          backgroundColor: Theme.of(context).accentColor,
           onPressed: () {
             _handlerFab(context);
           }),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: Theme
-                        .of(context)
-                        .primaryColor,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(35),
-                        bottomRight: Radius.circular(35))),
-                height: 100,
-                width: double.infinity,
-                child: Row(
-                    textBaseline: TextBaseline.alphabetic,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    children: Categories().getCategories().map((category) {
-                      return CategoryItem(
-                          name: category.name,
-                          active: category.active,
-                          picture: category.picture);
-                    }).toList()),
-              ),
-              Container(
-                height: listHeight,
-                child: ListView.builder(
-                    itemBuilder: (_, i) =>
-                        ProductItem(
-                          id: products[i].id,
-                          picture: products[i].picture,
-                          title: products[i].title,
-                          description: products[i].description,
-                          price: products[i].price,
-                          amount: products[i].amount,
-                          tag: products[i].tag,
-                        )),
-              )
-            ],
+          child: SafeArea(
+            child: Column(
+              children: [
+                Stack(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(35),
+                            bottomRight: Radius.circular(35))),
+                    height: 100,
+                    width: double.infinity,
+                    child: Row(
+                        textBaseline: TextBaseline.alphabetic,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: Categories().getCategories().map((category) {
+                          return CategoryItem(
+                              name: category.name,
+                              active: category.active,
+                              picture: category.picture);
+                        }).toList()),
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 40),
+                        padding: EdgeInsets.all(10),
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                      )),
+                ]
+                ),
+                Container(
+                  height: listHeight,
+                  child: ListView.builder(
+                      itemBuilder: (_, i) => ProductItem(
+                            id: products[i].id,
+                            picture: products[i].picture,
+                            title: products[i].title,
+                            description: products[i].description,
+                            price: products[i].price,
+                            amount: products[i].amount,
+                            tag: products[i].tag,
+                          )),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -130,9 +140,7 @@ class DashboardScreen extends StatelessWidget {
             children: [
               Text(
                 'Set Price Range',
-              style: TextStyle(
-                color: Colors.white70
-              ),
+                style: TextStyle(color: Colors.white70),
               ),
               Center(
                 child: RangeSlider(
@@ -166,9 +174,7 @@ class DashboardScreen extends StatelessWidget {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
-                          color: Theme
-                              .of(context)
-                              .accentColor, width: 3),
+                          color: Theme.of(context).accentColor, width: 3),
                     ),
                     labelText: 'The desired word',
                   ),
@@ -193,23 +199,19 @@ class DashboardScreen extends StatelessWidget {
                           height: 30,
                           decoration: BoxDecoration(
                               color: _isSelected
-                                  ? Theme
-                                  .of(context)
-                                  .accentColor
+                                  ? Theme.of(context).accentColor
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(5),
                               border: _isSelected
                                   ? null
                                   : Border.all(
-                                  color: Theme
-                                      .of(context)
-                                      .accentColor,
-                                  width: 2)),
+                                      color: Theme.of(context).accentColor,
+                                      width: 2)),
                           child: _isSelected
                               ? Icon(
-                            Icons.check,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
                               : null),
                     ),
                   ],
@@ -234,23 +236,19 @@ class DashboardScreen extends StatelessWidget {
                           height: 30,
                           decoration: BoxDecoration(
                               color: _isSelected
-                                  ? Theme
-                                  .of(context)
-                                  .accentColor
+                                  ? Theme.of(context).accentColor
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(5),
                               border: _isSelected
                                   ? null
                                   : Border.all(
-                                  color: Theme
-                                      .of(context)
-                                      .accentColor,
-                                  width: 2)),
+                                      color: Theme.of(context).accentColor,
+                                      width: 2)),
                           child: _isSelected
                               ? Icon(
-                            Icons.check,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
                               : null),
                     )
                   ],
@@ -275,23 +273,19 @@ class DashboardScreen extends StatelessWidget {
                           height: 30,
                           decoration: BoxDecoration(
                               color: _isSelected
-                                  ? Theme
-                                  .of(context)
-                                  .accentColor
+                                  ? Theme.of(context).accentColor
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(5),
                               border: _isSelected
                                   ? null
                                   : Border.all(
-                                  color: Theme
-                                      .of(context)
-                                      .accentColor,
-                                  width: 2)),
+                                      color: Theme.of(context).accentColor,
+                                      width: 2)),
                           child: _isSelected
                               ? Icon(
-                            Icons.check,
-                            color: Colors.white,
-                          )
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
                               : null),
                     ),
                   ],
@@ -305,13 +299,13 @@ class DashboardScreen extends StatelessWidget {
                   onPressed: () {},
                   style: ButtonStyle(
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xfF0496E2)),
+                          MaterialStateProperty.all<Color>(Color(0xfF0496E2)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ))),
+                        borderRadius: BorderRadius.circular(10),
+                      ))),
                   // onPressed: () {
                   //   if (_formKey.currentState.validate() &&
                   //       !validateUserName() &&
@@ -338,7 +332,6 @@ class DashboardScreen extends StatelessWidget {
                   // },
                 ),
               ),
-
             ],
           ),
         );
