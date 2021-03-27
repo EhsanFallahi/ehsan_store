@@ -1,4 +1,4 @@
-import 'package:ehsan_store/model/product/Product.dart';
+import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/widgets/BorderedContainer.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +119,7 @@ class ProductDetailScreen extends StatelessWidget {
                                             BorderRadius.circular(11)),
                                     child: Center(
                                       child: Text(
-                                        productDetail.amount,
+                                        '8',
                                         style: TextStyle(
                                             color: Colors.black87,
                                             fontSize: 12,
@@ -166,7 +166,7 @@ class ProductDetailScreen extends StatelessWidget {
                                             fontSize: 16, color: Colors.white),
                                       ),
                                       Text(
-                                        productDetail.price,
+                                        '900000',
                                         style: TextStyle(
                                             fontSize: 24,
                                             color: Color(0xffD43030)),

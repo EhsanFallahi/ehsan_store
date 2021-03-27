@@ -1,4 +1,4 @@
-import 'package:ehsan_store/model/product/Product.dart';
+import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
@@ -116,7 +116,7 @@ class FavoritesScreen extends StatelessWidget {
                                   ),
                                   SizedBox(height: 8),
                                   Text(
-                                    productDetail.price,
+                                    '86000',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16,

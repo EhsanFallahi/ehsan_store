@@ -1,7 +1,7 @@
 import 'dart:js';
 
-import 'package:ehsan_store/model/category/Category.dart';
-import 'package:ehsan_store/model/product/Product.dart';
+import 'package:ehsan_store/data_source/model/category/Category.dart';
+import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
 import 'package:ehsan_store/screens/drawer/MainDrawer.dart';
 import 'package:ehsan_store/widgets/CategoryItem.dart';
@@ -117,8 +117,8 @@ class DashboardScreen extends StatelessWidget {
                             picture: products[i].picture,
                             title: products[i].title,
                             description: products[i].description,
-                            price: products[i].price,
-                            amount: products[i].amount,
+                            price: '12430',
+                            amount: '10',
                             tag: products[i].tag,
                           )),
                 )

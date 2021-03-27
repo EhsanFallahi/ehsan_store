@@ -1,7 +1,7 @@
 class Category{
-  final String name;
-  final bool active;
-  final String picture;
+   String name;
+   bool active;
+   String picture;
 
   Category(this.name,this.active,this.picture);
 }
