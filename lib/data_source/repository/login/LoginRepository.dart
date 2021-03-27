@@ -24,7 +24,6 @@ class LoginRepository implements AbstractLoginRepository {
 
   @override
   Future<Response> getUser() async {
-
     return _dio.get('/user');
   }
 

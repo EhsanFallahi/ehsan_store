@@ -107,8 +107,7 @@ class DashboardScreen extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20)),
                       )),
-                ]
-                ),
+                ]),
                 Container(
                   height: listHeight,
                   child: ListView.builder(

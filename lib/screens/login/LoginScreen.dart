@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:ehsan_store/controller/login_controller/LoginController.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
+import 'package:ehsan_store/screens/register/RegisterScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -159,7 +160,10 @@ class LoginScreen extends StatelessWidget {
                         textColor: Colors.white,
                         color: Colors.blue,
                         child: Text('Register'),
-                        onPressed: () {},
+                        onPressed: () {
+                          cleanTextFeilds();
+                          Get.to(RegisterationScreen());
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         borderSide:
@@ -172,5 +176,10 @@ class LoginScreen extends StatelessWidget {
             )),
       ),
     ));
+  }
+
+  void cleanTextFeilds() {
+    _loginController.usernameController.text='';
+    _loginController.passwordController.text='';
   }
 }

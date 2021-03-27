@@ -7,7 +7,7 @@ import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:ehsan_store/screens/favorite/FavoritesScreen.dart';
 import 'package:ehsan_store/screens/login/LoginScreen.dart';
 import 'package:ehsan_store/screens/product_detail/ProductDetail.dart';
-import 'package:ehsan_store/screens/register/Registeration.dart';
+import 'package:ehsan_store/screens/register/RegisterScreen.dart';
 import 'package:ehsan_store/screens/settings/ProfileSetting.dart';
 import 'package:ehsan_store/screens/splash/SplashScreen.dart';
 import 'package:flutter/material.dart';
