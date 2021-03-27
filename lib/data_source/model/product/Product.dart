@@ -1,13 +1,13 @@
 class Product {
-   String id;
-   String title;
-   String description;
-   String picture;
-   double price;
-   int amount;
-   bool is_display;
-   String tag;
-   bool is_favorites;
+  int id;
+  String title;
+  String description;
+  String picture;
+  double price;
+  int amount;
+  bool is_display;
+  String tag;
+  bool is_favorites;
 
   Product(
       {this.id,
@@ -21,16 +21,16 @@ class Product {
       this.is_favorites});
 
 
-  Product.fromJson(Map<String, dynamic> json) {
+  void fromJson(dynamic json) {
     id = json['id'];
+    picture = json['picture'];
     title = json['title'];
     description = json['description'];
-    picture = json['picture'];
     price = json['price'];
     amount = json['amount'];
-    is_display = json['is_display'];
-    tag = json['tag'].cast<String>();
+    tag = json['tag'];
     is_favorites = json['is_favorites'];
+    is_display = json['is_display'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,14 +46,12 @@ class Product {
     data['is_favorites'] = this.is_favorites;
     return data;
   }
-
-
 }
 
 class Products {
   List<Product> _products = [
     Product(
-        id: '1',
+        id: 1,
         picture: 'https://m.media-amazon.com/images/I/61ypNMyv9LL._UL1500_.jpg',
         title: 'product_one',
         description: 'product_one_description',
@@ -63,7 +61,7 @@ class Products {
         tag: '#summer',
         is_favorites: false),
     Product(
-        id: '2',
+        id: 2,
         picture:
             'https://images-na.ssl-images-amazon.com/images/I/61rCxJDiwlL._UL1500_.jpg',
         title: 'product_two',
@@ -72,9 +70,9 @@ class Products {
         amount: 10,
         is_display: true,
         tag: '#summer',
-        is_favorites:false),
+        is_favorites: false),
     Product(
-        id: '3',
+        id: 3,
         picture:
             'https://5.imimg.com/data5/JO/RI/MY-28614641/designer-navy-blue-dress-500x500.jpg',
         title: 'product_three',

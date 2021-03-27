@@ -8,7 +8,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    final productDetail=Products().getProduct('1');
+    // final productDetail=Products().getProduct('1');
 
     final appBar = AppBar(
       centerTitle: true,
@@ -101,7 +101,7 @@ class CartScreen extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                      productDetail.title,
+                                     ' productDetail.title',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 28,

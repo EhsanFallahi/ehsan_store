@@ -1,5 +1,6 @@
 import 'dart:js';
 
+import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/data_source/model/category/Category.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
@@ -7,29 +8,27 @@ import 'package:ehsan_store/screens/drawer/MainDrawer.dart';
 import 'package:ehsan_store/widgets/CategoryItem.dart';
 import 'package:ehsan_store/widgets/ProductItem.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DashboardScreen extends StatelessWidget {
+  ProductController get _productController => Get.find<ProductController>();
+
   bool _isSelected = false;
   RangeValues _values = RangeValues(1, 100);
   RangeLabels _labels = RangeLabels('1', '100');
 
   @override
   Widget build(BuildContext context) {
-    List<Product> products = Products().products;
+    Get.lazyPut<ProductController>(() => ProductController());
+    // List<Product> products = Products().products;
+    // List<Product> productss = _productController.getAllProducts() ;
+    // print('on dashboard product is: $productss');
     final mediaQuery = MediaQuery.of(context);
 
     final appBar = AppBar(
       centerTitle: true,
       elevation: 0,
       backgroundColor: Theme.of(context).primaryColor,
-      // leading: Padding(padding: EdgeInsets.only(left: 15),
-      //   child: IconButton(
-      //     icon: Icon(Icons.apps_rounded, color: Colors.white,),
-      //     onPressed: () {
-      //
-      //     },
-      //   ),
-      // ),
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 15),
@@ -63,7 +62,9 @@ class DashboardScreen extends StatelessWidget {
           onPressed: () {
             _handlerFab(context);
           }),
-      body: SingleChildScrollView(
+      body: Obx(()=>_productController.isLoading.value?Center(
+        child: CircularProgressIndicator(),
+      ):SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -96,7 +97,6 @@ class DashboardScreen extends StatelessWidget {
                         }).toList()),
                   ),
                   Positioned(
-                      bottom: 0,
                       left: 0,
                       right: 0,
                       child: Container(
@@ -111,14 +111,15 @@ class DashboardScreen extends StatelessWidget {
                 Container(
                   height: listHeight,
                   child: ListView.builder(
+                    itemCount: _productController.tempListProducts.length,
                       itemBuilder: (_, i) => ProductItem(
-                            id: products[i].id,
-                            picture: products[i].picture,
-                            title: products[i].title,
-                            description: products[i].description,
-                            price: '12430',
-                            amount: '10',
-                            tag: products[i].tag,
+                            id: _productController.tempListProducts[i].id,
+                            picture: _productController.tempListProducts[i].picture,
+                            title: _productController.tempListProducts[i].title,
+                            description: _productController.tempListProducts[i].description,
+                            price: _productController.tempListProducts[i].price,
+                            amount: _productController.tempListProducts[i].amount,
+                            tag: _productController.tempListProducts[i].tag,
                           )),
                 )
               ],
@@ -126,6 +127,7 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
       ),
+      )
     );
   }
 

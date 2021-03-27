@@ -18,7 +18,6 @@ class User {
      userName = json['user_name'];
      password = json['password'];
      roll = json['roll'];
-
    }
 
   Map<String, dynamic> toJson() {

@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController{
-  User _user = User();
-  Admin _admin = Admin();
 
   LoginRepository _loginRepository = LoginRepository();
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -18,9 +16,6 @@ class RegisterController extends GetxController{
 
   RxBool changeDisplayPassword = false.obs;
   RxBool isLoading = false.obs;
-  RxBool isValidUser = false.obs;
-  RxBool isValidAdmin = false.obs;
-  RxString roll = ''.obs;
 
   void registerUser(User user, String confirmPassword) async {
     isLoading(true);

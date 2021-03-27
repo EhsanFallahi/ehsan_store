@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 
 class LoginController extends GetxController {
-  User _user = User();
-  Admin _admin = Admin();
 
   List<dynamic> _allUsers = [];
   List<User> _tempListUsers = [];
@@ -45,24 +43,18 @@ class LoginController extends GetxController {
 
   RxBool changeDisplayPassword = false.obs;
   RxBool isLoading = false.obs;
-  RxBool isValidUser = false.obs;
-  RxBool isValidAdmin = false.obs;
-  RxString roll = ''.obs;
 
   void loginPerson(String userName, String password) async {
       if (isValidateUser(userName, password)) {
         isLoading(false);
-        isValidUser(true);
-        Get.off(DashboardScreen());
+        Get.off(DashboardScreen(),arguments:userName );
       } else {
         showWarningSnackBar();
       }
       if (isValidateAdmin(userName, password)) {
         isLoading(false);
-        isValidUser(true);
         Get.off(AdminProductDetail());
       }
-
   }
 
   void initialTempListAllUsers() {

@@ -4,24 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  final String picture;
-  final String title;
-  final String description;
-  final String price;
-  final String amount;
-  final String tag;
-  final int likes;
+  int id;
+  String title;
+  String description;
+  String picture;
+  double price;
+  int amount;
+  bool is_display;
+  String tag;
+  bool is_favorites;
+
 
   ProductItem(
       {this.id,
-      this.picture,
-      this.title,
-      this.description,
-      this.price,
-      this.amount,
-      this.tag,
-      this.likes});
+        this.picture,
+        this.title,
+        this.description,
+        this.price,
+        this.amount,
+        this.is_display,
+        this.tag,
+        this.is_favorites});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class ProductItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    price,
+                    price.toString(),
                     style: TextStyle(color: Color(0xffCB3232)),
                   ),
                   Text(

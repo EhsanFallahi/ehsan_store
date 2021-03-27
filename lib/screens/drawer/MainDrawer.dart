@@ -1,9 +1,14 @@
+import 'package:ehsan_store/controller/login_controller/LoginController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainDrawer extends StatelessWidget {
+  LoginController get _loginController => Get.find<LoginController>();
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<LoginController>(() => LoginController());
+    var userName=Get.arguments;
     return Drawer(
       child: Container(
 
@@ -12,28 +17,32 @@ class MainDrawer extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
+              height: MediaQuery.of(context).size.height*0.2,
               padding: EdgeInsets.all(20),
               color: Theme.of(context).accentColor,
               child: Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                'https://5.imimg.com/data5/SELLER/Default/2020/8/IM/UF/KR/58076618/new-product-500x500.jpeg'),
-                            fit: BoxFit.fill,
-                          ),
-                        )),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Hi',
+                        style: TextStyle(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w400,
+                          color: Colors.white
+                        ),
+                      ),
+                    ),
                     Text(
-                      'Profile Name',
+                      userName.toString().toUpperCase(),
                       style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.w400,
-                        color: Colors.white
+                          fontSize: 24,
+                          color: Colors.white60,
+                        letterSpacing: 4,
+                        fontStyle: FontStyle.italic
                       ),
                     ),
                   ],
