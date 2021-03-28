@@ -132,29 +132,29 @@ class RegisterationScreen extends StatelessWidget {
                           return null;
                       },
                       decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                BorderSide(color: Colors.white70, width: 3),
-                          ),
-                          labelText: 'Confirm Password',
-                          // suffixIcon: IconButton(
-                          //     icon: Obx(
-                          //       () => Icon(
-                          //         // Based on passwordVisible state choose the icon
-                          //         _registerController
-                          //                 .changeDisplayPassword.value
-                          //             ? Icons.visibility
-                          //             : Icons.visibility_off,
-                          //         color: Theme.of(context).accentColor,
-                          //       ),
-                          //     ),
-                          //     onPressed: () {
-                          //       _registerController
-                          //               .changeDisplayPassword.value =
-                          //           !_registerController
-                          //               .changeDisplayPassword.value;
-                          //     })
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(color: Colors.white70, width: 3),
+                        ),
+                        labelText: 'Confirm Password',
+                        // suffixIcon: IconButton(
+                        //     icon: Obx(
+                        //       () => Icon(
+                        //         // Based on passwordVisible state choose the icon
+                        //         _registerController
+                        //                 .changeDisplayPassword.value
+                        //             ? Icons.visibility
+                        //             : Icons.visibility_off,
+                        //         color: Theme.of(context).accentColor,
+                        //       ),
+                        //     ),
+                        //     onPressed: () {
+                        //       _registerController
+                        //               .changeDisplayPassword.value =
+                        //           !_registerController
+                        //               .changeDisplayPassword.value;
+                        //     })
                       ),
                     ),
                   ),
@@ -196,20 +196,7 @@ class RegisterationScreen extends StatelessWidget {
                                     .confirmPasswordController.text
                                     .trim()
                                     .toLowerCase());
-                          }
-                          // else if (_formKey.currentState.validate() &&
-                          //     validateUserName() &&
-                          //     validatePassword()) {
-                          //   // Get.off(TodoList());
-                          //
-                          //   Get.snackbar(
-                          //       'Hi Dear $userName', 'Welcome to ToDo App',
-                          //       snackPosition: SnackPosition.BOTTOM,
-                          //       margin: EdgeInsets.all(8),
-                          //       colorText: Colors.green,
-                          //       backgroundColor: Colors.black87);
-                          // }
-                          else {
+                          } else {
                             return;
                           }
                         },

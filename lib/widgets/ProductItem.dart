@@ -37,7 +37,8 @@ class ProductItem extends StatelessWidget {
           children: [
 
             Stack(
-              children:[ Padding(
+              children:[
+                Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),

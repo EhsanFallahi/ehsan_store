@@ -1,9 +1,13 @@
+import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
+import 'package:ehsan_store/data_source/repository/favorites/FavoritesRepository.dart';
 import 'package:ehsan_store/data_source/repository/product/ProductRepository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController{
   ProductRepository _productRepository = ProductRepository();
+  FavoritesRepository _favoritesRepository = FavoritesRepository();
   final productId = Get.arguments;
 
   dynamic _selectedProduct = Product().obs;
@@ -26,11 +30,13 @@ class ProductDetailController extends GetxController{
         Product _tempProduct = Product();
         _tempProduct.fromJson(_selectedProduct);
         tempSelectedProduct(_tempProduct);
-        print('product lenght:${tempSelectedProduct.value.picture}');
       });
     } catch (error) {
       isLoading(false);
       print('network error:$error');
     }
   }
+
+
+
 }

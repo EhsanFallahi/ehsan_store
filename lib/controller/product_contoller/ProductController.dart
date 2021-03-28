@@ -6,11 +6,8 @@ class ProductController extends GetxController {
   ProductRepository _productRepository = ProductRepository();
 
   List<dynamic> _allProduct = [].obs;
-
   var tempListProducts =List<Product>().obs;
-
   RxBool isLoading = false.obs;
-
 
   @override
   void onInit() async {

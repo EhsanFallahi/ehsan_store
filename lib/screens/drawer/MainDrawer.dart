@@ -1,17 +1,18 @@
 import 'package:ehsan_store/controller/login_controller/LoginController.dart';
+import 'package:ehsan_store/screens/favorite/FavoritesScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainDrawer extends StatelessWidget {
   LoginController get _loginController => Get.find<LoginController>();
+  final String userName=Get.arguments;
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<LoginController>(() => LoginController());
-    var userName=Get.arguments;
+
     return Drawer(
       child: Container(
-
         color: Theme.of(context).primaryColor,
         child: Column(
           children: [
@@ -72,8 +73,10 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.tag,color: Colors.black,),
-              onTap: (){},
+              leading: Icon(Icons.star,color: Colors.black,),
+              onTap: (){
+                Get.to(FavoritesScreen());
+              },
               title: Text(
                 'Favorites',
                 style: TextStyle(

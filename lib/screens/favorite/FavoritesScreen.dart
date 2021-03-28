@@ -1,19 +1,22 @@
+import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
+import 'package:ehsan_store/widgets/FavoritesItem.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FavoritesScreen extends StatelessWidget {
+  FavoritesController get _favoritesController =>
+      Get.find<FavoritesController>();
+
+
   @override
   Widget build(BuildContext context) {
-    final productDetail = Products().getProduct('2');
-
-    final appBar = AppBar(
-      centerTitle: true,
-      elevation: 0,
-      backgroundColor: Theme.of(context).primaryColor,
-    );
+    Get.lazyPut<FavoritesController>(() => FavoritesController());
+    print(
+        'favorites lenght is :${_favoritesController.tempListFavorites.length}');
+    _favoritesController.onInit();
     return Scaffold(
-      appBar: appBar,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -31,7 +34,7 @@ class FavoritesScreen extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(35),
                         bottomRight: Radius.circular(35))),
-                height: 100,
+                height: MediaQuery.of(context).size.height * 0.2,
                 width: double.infinity,
                 child: Center(
                   child: Text(
@@ -43,106 +46,40 @@ class FavoritesScreen extends StatelessWidget {
                         color: Colors.white70),
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children:[
-                  Container(
-                    height: 180,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white60,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xfF0496E2),
-                              blurRadius: 25,
-                              offset: Offset(4, 0))
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              width: 100,
-                              height: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    8,
-                                  ),
-                                  color: Colors.white60,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black45,
-                                        blurRadius: 10,
-                                        offset: Offset(0, 6))
-                                  ]),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    'https://images-na.ssl-images-amazon.com/images/I/61rCxJDiwlL._UL1500_.jpg',
-                                    fit: BoxFit.fill,
+              Obx(
+                () => _favoritesController.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Container(
+                        height: 190,
+                        child: Obx(
+                          () => ListView.builder(
+                              itemCount:
+                                  _favoritesController.tempListFavorites.length,
+                              itemBuilder: (_, i) => FavoritesItem(
+                                    id: _favoritesController
+                                        .tempListFavorites[i].id,
+                                    picture: _favoritesController
+                                        .tempListFavorites[i].picture,
+                                    title: _favoritesController
+                                        .tempListFavorites[i].title,
+                                    description: _favoritesController
+                                        .tempListFavorites[i].description,
+                                    price: _favoritesController
+                                        .tempListFavorites[i].price,
+                                    tag: _favoritesController
+                                        .tempListFavorites[i].tag,
+                                    is_favorites: _favoritesController
+                                        .tempListFavorites[i].is_favorites,
                                   )),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    productDetail.title,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 28,
-                                        color: Colors.white,
-                                        letterSpacing: 4),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    productDetail.description,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                        color: Colors.black12,
-                                        letterSpacing: 4),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    '86000',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16,
-                                        color: Color(0xffDE3C5D),
-                                        letterSpacing: 4),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: FavoriteButton(
-                                      isFavorite: true,
-                                      valueChanged: (_isFavorite) {
-                                        print('Is Favorite : $_isFavorite');
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                    ],
-                ),
-              ),
+              )
             ],
           ),
         ),

@@ -1,7 +1,6 @@
 import 'dart:js';
 
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
-import 'package:ehsan_store/data_source/model/category/Category.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
 import 'package:ehsan_store/screens/drawer/MainDrawer.dart';
@@ -93,7 +92,8 @@ class DashboardScreen extends StatelessWidget {
                             price: _productController.tempListProducts[i].price,
                             amount: _productController.tempListProducts[i].amount,
                             tag: _productController.tempListProducts[i].tag,
-                          )),
+                          )
+                  ),
                 )
               ],
             ),
