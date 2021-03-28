@@ -30,7 +30,7 @@ class HeaderWithSearch extends StatelessWidget {
                 child: Text(
                   'Ehsan Store',
                   style: TextStyle(
-                    color: SECENDORY_COLOR,
+                    color: SECONDARY_COLOR,
                     fontSize: 24,
                     letterSpacing: 3,
                   ),

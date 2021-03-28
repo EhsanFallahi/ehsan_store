@@ -1,4 +1,5 @@
 import 'package:ehsan_store/data_source/model/product/Product.dart';
+import 'package:ehsan_store/widgets/CartItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,8 +7,6 @@ import 'package:get/get.dart';
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     // final productDetail=Products().getProduct('1');
 
     final appBar = AppBar(
@@ -48,87 +47,12 @@ class CartScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 10,
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 130,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white60,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xfF0496E2),
-                              blurRadius: 25,
-                              offset: Offset(4, 0))
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  8,
-                                ),
-                                color: Colors.white60,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black45,
-                                        blurRadius: 10,
-                                        offset: Offset(0, 6))
-                                  ]),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                'https://images-na.ssl-images-amazon.com/images/I/61rCxJDiwlL._UL1500_.jpg',
-                                fit: BoxFit.fill,
-                              )),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                     ' productDetail.title',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 28,
-                                      color: Colors.white,
-                                      letterSpacing: 4
-                                    ),
-                                  ),
-                                    Text(
-                                      '12300',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20,
-                                          color: Color(0xffDE3C5D),
-                                          letterSpacing: 4
-                                      ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            ),ListView.builder(
+        itemCount:1,
+        itemBuilder: (_, i) =>
+            CartItem(
+
+            ),),
             Expanded(
               child: Align(
                   alignment: FractionalOffset.bottomCenter,
@@ -153,16 +77,16 @@ class CartScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 6,
                                 ),
-                              ),SizedBox(
+                              ),
+                              SizedBox(
                                 height: 8,
                               ),
-                      Text(
-                          '10000',
-                          style: TextStyle(
-                              color: Color(0xffDE3C5D),
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold
-                          ),
+                              Text(
+                                '10000',
+                                style: TextStyle(
+                                    color: Color(0xffDE3C5D),
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -176,22 +100,23 @@ class CartScreen extends StatelessWidget {
                               child: Text('Buy'),
                               style: ButtonStyle(
                                   foregroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.white),
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
                                   backgroundColor:
-                                  MaterialStateProperty.all<Color>(Color(0xfF0496E2)),
-                                  shape:
-                                  MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      MaterialStateProperty.all<Color>(
+                                          Color(0xfF0496E2)),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ))),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ))),
                               onPressed: () {},
                             ),
                           ),
                         ),
                       ],
                     ),
-                  )
-              ),
+                  )),
             ),
           ]),
         ),
@@ -199,3 +124,5 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
+
+
