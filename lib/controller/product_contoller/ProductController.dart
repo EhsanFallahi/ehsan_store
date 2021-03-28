@@ -6,9 +6,11 @@ class ProductController extends GetxController {
   ProductRepository _productRepository = ProductRepository();
 
   List<dynamic> _allProduct = [].obs;
+
   var tempListProducts =List<Product>().obs;
 
   RxBool isLoading = false.obs;
+
 
   @override
   void onInit() async {
@@ -18,7 +20,7 @@ class ProductController extends GetxController {
    void getAllProducts(){
     try {
       isLoading(true);
-        _productRepository.getProduct().then((response) {
+        _productRepository.getAllProducts().then((response) {
           isLoading(false);
         _allProduct.addAll(response.data);
           initialTempListAllProducts() ;
@@ -37,4 +39,5 @@ class ProductController extends GetxController {
       tempListProducts.add(_tempProduct);
     }
   }
+
 }
