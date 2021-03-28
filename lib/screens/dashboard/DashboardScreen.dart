@@ -5,7 +5,10 @@ import 'package:ehsan_store/data_source/model/category/Category.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
 import 'package:ehsan_store/screens/drawer/MainDrawer.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/CategoryItem.dart';
+import 'package:ehsan_store/widgets/HeaderWithSearch.dart';
+import 'package:ehsan_store/widgets/MyAppBar.dart';
 import 'package:ehsan_store/widgets/ProductItem.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,10 +28,12 @@ class DashboardScreen extends StatelessWidget {
     // print('on dashboard product is: $productss');
     final mediaQuery = MediaQuery.of(context);
 
+    Size size=MediaQuery.of(context).size;
+
     final appBar = AppBar(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: PRIMARY_COLOR,
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 15),
@@ -73,41 +78,9 @@ class DashboardScreen extends StatelessWidget {
               colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
             ),
           ),
-          child: SafeArea(
             child: Column(
               children: [
-                Stack(children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(35),
-                            bottomRight: Radius.circular(35))),
-                    height: 100,
-                    width: double.infinity,
-                    child: Row(
-                        textBaseline: TextBaseline.alphabetic,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        children: Categories().getCategories().map((category) {
-                          return CategoryItem(
-                              name: category.name,
-                              active: category.active,
-                              picture: category.picture);
-                        }).toList()),
-                  ),
-                  Positioned(
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 40),
-                        padding: EdgeInsets.all(10),
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)),
-                      )),
-                ]),
+                HeaderWithSearch(size: size),
                 Container(
                   height: listHeight,
                   child: ListView.builder(
@@ -124,7 +97,6 @@ class DashboardScreen extends StatelessWidget {
                 )
               ],
             ),
-          ),
         ),
       ),
       )
@@ -340,3 +312,5 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 }
+
+

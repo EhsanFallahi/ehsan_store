@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xfF474546),
       ),
       debugShowCheckedModeBanner: false,
-      home:LoginScreen(),
+      home:DashboardScreen(),
     );
   }
 }
