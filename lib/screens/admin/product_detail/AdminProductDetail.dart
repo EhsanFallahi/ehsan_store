@@ -1,3 +1,4 @@
+import 'package:ehsan_store/screens/admin/drawer/AdminDrawer.dart';
 import 'package:flutter/material.dart';
 
 class AdminProductDetail extends StatelessWidget {
@@ -10,6 +11,7 @@ class AdminProductDetail extends StatelessWidget {
     );
     return Scaffold(
       appBar: appBar,
+      drawer: AdminDrawer(),
       floatingActionButton: Align(
         alignment: Alignment.bottomCenter,
         child: FloatingActionButton.extended(

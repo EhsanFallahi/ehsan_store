@@ -53,7 +53,7 @@ class LoginController extends GetxController {
       }
       if (isValidateAdmin(userName, password)) {
         isLoading(false);
-        Get.off(AdminProductDetail());
+        Get.off(AdminProductDetail(),arguments: userName);
       }
   }
 

@@ -3,6 +3,7 @@ import 'dart:js';
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
+import 'package:ehsan_store/screens/cart/CartScreen.dart';
 import 'package:ehsan_store/screens/drawer/MainDrawer.dart';
 import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/CategoryItem.dart';
@@ -41,7 +42,9 @@ class DashboardScreen extends StatelessWidget {
               Icons.shopping_cart_sharp,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Get.to(CartScreen());
+            },
           ),
         )
       ],

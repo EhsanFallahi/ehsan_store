@@ -8,7 +8,8 @@ class CartItem extends StatelessWidget {
   String picture;
   double price;
 
-  CartItem({this.id,
+  CartItem({
+    this.id,
     this.picture,
     this.title,
     this.price,

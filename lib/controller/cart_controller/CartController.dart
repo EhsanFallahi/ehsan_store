@@ -1,72 +1,74 @@
+import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
-import 'package:ehsan_store/data_source/repository/favorites/FavoritesRepository.dart';
+import 'package:ehsan_store/data_source/repository/cart/CartRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController{
-  FavoritesRepository _favoritesRepository = FavoritesRepository();
+  CartRepository _cartRepository = CartRepository();
 
-  List<dynamic> _allFavorites = [].obs;
-  var tempListFavorites =List<Favorites>().obs;
+  List<dynamic> _allCarts = [];
+  var tempListCarts =List<Cart>().obs();
   RxBool isLoading = false.obs;
 
   @override
-  void onInit() {
-    getAllFavorites();
-    super.onInit();
+  void onInit() async {
+    getAllCarts();
   }
 
-  void getAllFavorites(){
-    print('getAllFavorites():');
-    try {
-      print('getAllFavorites():try');
-      isLoading(true);
-      _favoritesRepository.getAllFavorites().then((response) {
-        isLoading(false);
-        _allFavorites.addAll(response.data);
-        initialTempListAllFavorites();
-        print('getAllFavorites():');
-        print('onInit products is$tempListFavorites');
-      });
-    } catch (error) {
-      isLoading(false);
-      print('network error:$error');
-    }
-  }
 
-  void addFavorites(Favorites favorites) async {
-    print('on product deatil favorites is:$favorites.');
+  void addCart(Cart cart) async {
     try {
       isLoading(true);
-      await _favoritesRepository.addFavorites(favorites);
-      isLoading(false);
-      print('favorites added is:${favorites.toString()}');
-      showSnackBar();
+      await _cartRepository.addToCart(cart);
+      tempListCarts.add(cart);
+      // isAddedAdmin(true);
+      print('cart  added!');
+      showAddedCartSnackBa();
+      // Get.off(DashboardScreen());
     }catch(error){
+      // isAddedAdmin(false);
       print('network error:$error');
     } finally {
       isLoading(false);
+
     }
   }
 
-  void showSnackBar()=>Get.snackbar('Favorites', 'Added to your favorites',
+
+  void getAllCarts(){
+    // if(isAddedAdmin.value){
+    //   return;
+    // }
+    // else{
+      try {
+        isLoading(true);
+        _cartRepository.getAllCarts().then((response) {
+          // isAddedAdmin(true);
+          isLoading(false);
+          _allCarts.addAll(response.data);
+          initialTempListAllCarts() ;
+          print('onInit carts is$tempListCarts');
+        });
+      } catch (error) {
+        // isAddedAdmin(false);
+        isLoading(false);
+        print('network error:$error');
+      }
+    // }
+  }
+
+  void showAddedCartSnackBa()=>Get.snackbar('Carts', 'Added to your Cart',
       snackPosition: SnackPosition.BOTTOM,
       margin: EdgeInsets.all(8),
       colorText: Theme.of(Get.context).accentColor,
       backgroundColor: Colors.black87.withOpacity(0.8));
 
-  void initialTempListAllFavorites() {
-    for (var favorites in _allFavorites) {
-      Favorites _tempFavorites = Favorites();
-      _tempFavorites.fromJson(favorites);
-      tempListFavorites.add(_tempFavorites);
+  void initialTempListAllCarts() {
+    for (var cart in _allCarts) {
+      Cart _tempCart = Cart();
+      _tempCart.fromJson(cart);
+      tempListCarts.add(_tempCart);
     }
   }
-
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-  }
-
 }

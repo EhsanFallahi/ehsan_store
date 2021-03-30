@@ -7,12 +7,6 @@ class Admin{
   Admin({this.id,this.userName,this.password,this.roll});
 
 
-   // Admin.fromJson(Map<String, dynamic> json) {
-   //   user_name = json['user_name'];
-   //   password = json['password'];
-   //   roll = json['roll'];
-   //   id = json['id'];
-   // }
 
    void fromJson(dynamic json) {
      id = json['id'];

@@ -138,23 +138,6 @@ class RegisterationScreen extends StatelessWidget {
                               BorderSide(color: Colors.white70, width: 3),
                         ),
                         labelText: 'Confirm Password',
-                        // suffixIcon: IconButton(
-                        //     icon: Obx(
-                        //       () => Icon(
-                        //         // Based on passwordVisible state choose the icon
-                        //         _registerController
-                        //                 .changeDisplayPassword.value
-                        //             ? Icons.visibility
-                        //             : Icons.visibility_off,
-                        //         color: Theme.of(context).accentColor,
-                        //       ),
-                        //     ),
-                        //     onPressed: () {
-                        //       _registerController
-                        //               .changeDisplayPassword.value =
-                        //           !_registerController
-                        //               .changeDisplayPassword.value;
-                        //     })
                       ),
                     ),
                   ),

@@ -1,5 +1,7 @@
+import 'package:ehsan_store/controller/cart_controller/CartController.dart';
 import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
 import 'package:ehsan_store/controller/product_contoller/product_detail_controller/ProductDetailController.dart';
+import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/widgets/BorderedContainer.dart';
@@ -14,10 +16,14 @@ class ProductDetailScreen extends StatelessWidget {
   FavoritesController get _favoritesController =>
       Get.find<FavoritesController>();
 
+  CartController get _cartController =>
+      Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<ProductDetailController>(() => ProductDetailController());
     Get.lazyPut<FavoritesController>(() => FavoritesController());
+    Get.lazyPut<CartController>(() => CartController());
 
     // final productDetail = Products().getProduct(productId);
 
@@ -209,7 +215,9 @@ class ProductDetailScreen extends StatelessWidget {
                                                           .tempSelectedProduct
                                                           .value
                                                           .price,
-                                                  is_favorites: true));
+                                                  is_favorites: true)
+                                          );
+                                          _favoritesController.getAllFavorites();
                                         }
                                       },
                                     ),
@@ -256,7 +264,16 @@ class ProductDetailScreen extends StatelessWidget {
                                     child: InkWell(
                                       borderRadius: BorderRadius.circular(12),
                                       splashColor: Colors.white24,
-                                      onTap: () {},
+                                      onTap: () {
+                                        _cartController.addCart(Cart(
+                                          id: _productDetailController.tempSelectedProduct.value.id,
+                                          picture: _productDetailController.tempSelectedProduct.value.picture,
+                                          title: _productDetailController.tempSelectedProduct.value.title,
+                                          price: _productDetailController.tempSelectedProduct.value.price,
+                                          amount: _productDetailController.amountCounter.value
+                                        )
+                                        );
+                                      },
                                       child: Container(
                                         width: double.infinity,
                                         height: double.infinity,
@@ -271,7 +288,7 @@ class ProductDetailScreen extends StatelessWidget {
                                                 color: Colors.white,
                                               ),
                                               Text(
-                                                'ADD',
+                                                'BUY',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,

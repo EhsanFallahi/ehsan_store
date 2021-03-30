@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AddProduct extends StatelessWidget {
+class AddProductAdminScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(

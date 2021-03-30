@@ -1,5 +1,5 @@
-import 'package:ehsan_store/screens/admin/add_admin/AddAdmin.dart';
-import 'package:ehsan_store/screens/admin/add_product/AddProduct.dart';
+import 'package:ehsan_store/screens/admin/add_admin/AddAdminScreen.dart';
+import 'package:ehsan_store/screens/admin/add_product/AddProductAdminScreen.dart';
 import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetail.dart';
 import 'package:ehsan_store/screens/admin/product_edit/ProductEdit.dart';
 import 'package:ehsan_store/screens/cart/CartScreen.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xfF474546),
       ),
       debugShowCheckedModeBanner: false,
-      home:CartScreen(),
+      home:Produ(),
     );
   }
 }

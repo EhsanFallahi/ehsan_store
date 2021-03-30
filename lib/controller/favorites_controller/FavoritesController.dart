@@ -6,12 +6,14 @@ import 'package:get/get.dart';
 class FavoritesController extends GetxController{
   FavoritesRepository _favoritesRepository = FavoritesRepository();
 
-  List<dynamic> _allFavorites = [].obs;
+  List<dynamic> _allFavorites = [];
   var tempListFavorites =List<Favorites>().obs;
   RxBool isLoading = false.obs;
 
   @override
-  void onInit() {
+  void onInit() async{
+    print('in init  _allFavorites lenght is: ${_allFavorites.length}');
+    print('temp favorites lenght in onInit is: ${tempListFavorites.length}');
     getAllFavorites();
     super.onInit();
   }
@@ -21,12 +23,14 @@ class FavoritesController extends GetxController{
     try {
       print('getAllFavorites():try');
       isLoading(true);
+      print('getAllFavorites():try   isLoading(true);');
       _favoritesRepository.getAllFavorites().then((response) {
         isLoading(false);
+        print('getAllFavorites():try   isLoading(true);');
         _allFavorites.addAll(response.data);
+        print('getAllFavorites():try   _allFavorites.addAll(response.data)');
         initialTempListAllFavorites();
-        print('getAllFavorites():');
-        print('onInit products is$tempListFavorites');
+        print('temp favorites lenght in getAll is: ${tempListFavorites.length}');
       });
     } catch (error) {
       isLoading(false);
@@ -62,10 +66,9 @@ class FavoritesController extends GetxController{
       tempListFavorites.add(_tempFavorites);
     }
   }
-
-  @override
+@override
   void onClose() {
-    // TODO: implement onClose
+  print('temp favorites lenght in onClose is: ${tempListFavorites.length}');
     super.onClose();
   }
 

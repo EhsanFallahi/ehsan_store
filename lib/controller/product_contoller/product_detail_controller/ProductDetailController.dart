@@ -12,7 +12,7 @@ class ProductDetailController extends GetxController{
 
   dynamic _selectedProduct = Product().obs;
   var tempSelectedProduct =Product().obs;
-  RxInt amountCounter=0.obs;
+  RxDouble amountCounter=0.0.obs;
 
   RxBool isLoading = false.obs;
   @override
