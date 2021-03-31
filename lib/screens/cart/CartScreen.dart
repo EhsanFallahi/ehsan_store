@@ -1,16 +1,18 @@
 import 'package:ehsan_store/controller/cart_controller/CartController.dart';
+import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
+import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/CartItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartScreen extends StatelessWidget {
-  CartController get _cartController =>
-      Get.find<CartController>();
+  ProductController get _productController => Get.find<ProductController>();
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<CartController>(() => CartController());
+    Get.lazyPut<ProductController>(() => ProductController());
     // final productDetail=Products().getProduct('1');
 
     final appBar = AppBar(
@@ -20,8 +22,7 @@ class CartScreen extends StatelessWidget {
     );
     return Scaffold(
       appBar: appBar,
-      body: Obx((){
-        return Container(
+      body:Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -53,14 +54,16 @@ class CartScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              if(_cartController.tempListCarts.length>0)
+              if(_productController.tempListCarts.length>0)
                 ListView.builder(
-                  itemCount: _cartController.tempListCarts.length,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: _productController.tempListCarts.length,
                   itemBuilder: (context, i) => CartItem(
-                    picture: _cartController.tempListCarts[i].picture,
-                    title: _cartController.tempListCarts[i].title,
-                    price: _cartController.tempListCarts[i].price,
-                    amount: _cartController.tempListCarts[i].amount,
+                    picture: _productController.tempListCarts[i].picture,
+                    title: _productController.tempListCarts[i].title,
+                    price: _productController.tempListCarts[i].price,
+                    amount: _productController.tempListCarts[i].amount,
                   ),
                 ),
               Expanded(
@@ -92,7 +95,7 @@ class CartScreen extends StatelessWidget {
                                   height: 8,
                                 ),
                                 Text(
-                                  '10000',
+                                  calulateTotal(),
                                   style: TextStyle(
                                       color: Color(0xffDE3C5D),
                                       fontSize: 21,
@@ -120,7 +123,79 @@ class CartScreen extends StatelessWidget {
                                         RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10),
                                         ))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.defaultDialog(
+                                  title: 'Purchase confirmation',
+                                  titleStyle:
+                                  TextStyle(fontSize: 25, color: Colors.red),
+                                  middleTextStyle: TextStyle(fontSize: 21),
+                                  backgroundColor: PRIMARY_COLOR.withOpacity(0.8),
+                                  radius: 32,
+                                  content: Container(
+                                  width: double.maxFinite,
+                                  padding: EdgeInsets.all(8),
+                                  child: Column(
+                                  children: [
+                                  Text(
+                                  'Do you confirm your shopping list?',
+                                  style: TextStyle(
+                                  fontSize: 16, color: Colors.white60),
+                                  ),
+                                  SizedBox(height: 6,),
+                                    Container(
+                                      height: 300,
+                                      width: 200,
+                                      child: ListView.separated(
+                                        separatorBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(left: 20,right:20),
+                                            child: Divider(
+                                              color: SECONDARY_COLOR,
+                                            ),
+                                          );
+                                        },
+                                        itemCount: _productController.tempListCarts.length,
+                                        itemBuilder: (context, i) => Container(
+                                          child: ListTile(
+                                            title: Text(
+                                              _productController.tempListCarts[i].title,
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: SECONDARY_COLOR,
+                                                fontWeight: FontWeight.w500,
+                                                letterSpacing: 1,
+                                              ),
+                                            ),
+                                            trailing: Text(
+                                                _productController.tempListCarts[i].amount.toString(),
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.w500,
+                                                letterSpacing: 1,
+                                              ),
+                                            ),
+                                          ),
+
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                  ),
+                                  ),
+                                  textCancel: 'Cancel',
+                                  cancelTextColor: Colors.white,
+                                  onCancel: () {
+                                   Navigator.pop(context);
+                                  },
+                                  textConfirm: 'Purchse',
+                                  confirmTextColor: Colors.white,
+                                  onConfirm: () {
+                                    Navigator.pop(context);
+                                  _productController.showPurchseSnackBar();
+                                  }
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -130,9 +205,17 @@ class CartScreen extends StatelessWidget {
               ),
             ]),
           ),
-        );
-      },
-      ),
+        )
     );
   }
+  //
+  String calulateTotal() {
+    double total=0;
+    for(var i=0;i< _productController.tempListCarts.length;i++ ){
+      total=total+_productController.tempListCarts[i].amount*_productController.tempListCarts[i].price;
+    }
+    return total.toString();
+  }
+
+
 }

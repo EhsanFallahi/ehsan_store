@@ -1,7 +1,10 @@
+import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
+import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartItem extends StatelessWidget {
-
+  ProductController get _productController => Get.find<ProductController>();
   int id;
   String title;
   double amount;
@@ -18,12 +21,13 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ProductController>(() => ProductController());
     return Padding(
       padding: EdgeInsets.all(10),
       child: Stack(
         children: [
           Container(
-            height: 130,
+            height: MediaQuery.of(context).size.height*0.2,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.white60,
@@ -56,7 +60,7 @@ class CartItem extends StatelessWidget {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.network(
-                            'https://images-na.ssl-images-amazon.com/images/I/61rCxJDiwlL._UL1500_.jpg',
+                            picture,
                             fit: BoxFit.fill,
                           )),
                     ),
@@ -72,7 +76,7 @@ class CartItem extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            ' productDetail.title',
+                            title,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 28,
@@ -80,7 +84,7 @@ class CartItem extends StatelessWidget {
                                 letterSpacing: 4),
                           ),
                           Text(
-                            '12300',
+                            '${amount} * '+price.toString(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -96,7 +100,14 @@ class CartItem extends StatelessWidget {
                       Icons.delete_forever_rounded,
                       color: Colors.black87,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _productController.deleteCart(Cart(
+                        picture: picture,
+                        title: title,
+                        price: price,
+                        amount: amount
+                      ));
+                    },
                   )
                 ],
               ),

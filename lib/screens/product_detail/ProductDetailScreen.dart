@@ -1,5 +1,6 @@
 import 'package:ehsan_store/controller/cart_controller/CartController.dart';
 import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
+import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/controller/product_contoller/product_detail_controller/ProductDetailController.dart';
 import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
@@ -10,20 +11,43 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  ProductDetailController get _productDetailController =>
-      Get.find<ProductDetailController>();
+  final int id;
+  final String title;
+  final String description;
+  final String picture;
+  final double price;
+  final int amount;
+  final bool is_display;
+  final String tag;
+  final bool is_favorites;
 
-  FavoritesController get _favoritesController =>
-      Get.find<FavoritesController>();
+  ProductDetailScreen(
+      {this.id,
+        this.picture,
+        this.title,
+        this.description,
+        this.price,
+        this.amount,
+        this.is_display,
+        this.tag,
+        this.is_favorites});
 
-  CartController get _cartController =>
-      Get.find<CartController>();
+  ProductController get _productController => Get.find<ProductController>();
+  // ProductDetailController get _productDetailController =>
+  //     Get.find<ProductDetailController>();
+
+  // FavoritesController get _favoritesController =>
+  //     Get.find<FavoritesController>();
+
+  // CartController get _cartController =>
+  //     Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<ProductDetailController>(() => ProductDetailController());
-    Get.lazyPut<FavoritesController>(() => FavoritesController());
-    Get.lazyPut<CartController>(() => CartController());
+    Get.lazyPut<ProductController>(() => ProductController());
+    // Get.lazyPut<ProductDetailController>(() => ProductDetailController());
+    // Get.lazyPut<FavoritesController>(() => FavoritesController());
+    // Get.lazyPut<CartController>(() => CartController());
 
 
     final appBar = AppBar(
@@ -34,8 +58,8 @@ class ProductDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       extendBodyBehindAppBar: true,
-      body: Obx(
-        () => _productDetailController.isLoading.value
+      body: Obx((){
+        return _productController.isLoading.value
             ? Center(
                 child: CircularProgressIndicator(),
               )
@@ -61,10 +85,8 @@ class ProductDetailScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   child: Hero(
                                     child: Image.network(
-                                        _productDetailController
-                                            .tempSelectedProduct.value.picture),
-                                    tag: _productDetailController
-                                        .tempSelectedProduct.value.id,
+                                       picture),
+                                    tag:id,
                                   ),
                                 ),
                               ),
@@ -78,8 +100,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      _productDetailController
-                                          .tempSelectedProduct.value.title,
+                                      title,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 24,
@@ -89,8 +110,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  _productDetailController
-                                      .tempSelectedProduct.value.description,
+                                 description,
                                   style: TextStyle(
                                       color: Colors.black87, fontSize: 16),
                                 ),
@@ -135,7 +155,7 @@ class ProductDetailScreen extends StatelessWidget {
                                               ),
                                               color: Colors.white,
                                               onPressed: () {
-                                                _productDetailController
+                                                _productController
                                                     .amountCounter.value++;
                                               },
                                             ),
@@ -152,7 +172,7 @@ class ProductDetailScreen extends StatelessWidget {
                                               child: Center(
                                                 child: Obx(
                                                   () => Text(
-                                                    _productDetailController
+                                                    _productController
                                                         .amountCounter.value
                                                         .toString(),
                                                     style: TextStyle(
@@ -164,16 +184,20 @@ class ProductDetailScreen extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            Obx(
-                                              () => IconButton(
+                                         IconButton(
                                                 icon: Icon(Icons.remove),
                                                 color: Colors.white,
                                                 onPressed: () {
-                                                  _productDetailController
-                                                      .amountCounter.value--;
+                                                  if (_productController
+                                                      .amountCounter
+                                                      .value <
+                                                      1) {
+                                                    return;
+                                                  }
+                                                  _productController
+                                                      .amountCounter--;
                                                 },
                                               ),
-                                            )
                                           ],
                                         ),
                                       ),
@@ -192,30 +216,18 @@ class ProductDetailScreen extends StatelessWidget {
                                       valueChanged: (_isFavorite) {
                                         print('Is Favorite : $_isFavorite');
                                         if (_isFavorite) {
-                                          _favoritesController.addFavorites(
+                                          _productController.addFavorites(
                                               Favorites(
-                                                  picture: _productDetailController
-                                                      .tempSelectedProduct
-                                                      .value
-                                                      .picture,
+                                                  picture:picture,
                                                   title:
-                                                      _productDetailController
-                                                          .tempSelectedProduct
-                                                          .value
-                                                          .title,
+                                                     title,
                                                   description:
-                                                      _productDetailController
-                                                          .tempSelectedProduct
-                                                          .value
-                                                          .description,
+                                                      description,
                                                   price:
-                                                      _productDetailController
-                                                          .tempSelectedProduct
-                                                          .value
-                                                          .price,
+                                                      price,
                                                   is_favorites: true)
                                           );
-                                          _favoritesController.getAllFavorites();
+                                          _productController.getAllFavorites();
                                         }
                                       },
                                     ),
@@ -238,7 +250,7 @@ class ProductDetailScreen extends StatelessWidget {
                                                       color: Colors.white),
                                                 ),
                                                 Text(
-                                                  '900000',
+                                                  price.toString(),
                                                   style: TextStyle(
                                                       fontSize: 24,
                                                       color: Color(0xffD43030)),
@@ -263,12 +275,11 @@ class ProductDetailScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(12),
                                       splashColor: Colors.white24,
                                       onTap: () {
-                                        _cartController.addCart(Cart(
-                                          id: _productDetailController.tempSelectedProduct.value.id,
-                                          picture: _productDetailController.tempSelectedProduct.value.picture,
-                                          title: _productDetailController.tempSelectedProduct.value.title,
-                                          price: _productDetailController.tempSelectedProduct.value.price,
-                                          amount: _productDetailController.amountCounter.value
+                                        _productController.addCart(Cart(
+                                          picture:picture,
+                                          title: title,
+                                          price:price,
+                                          amount: _productController.amountCounter.value
                                         )
                                         );
                                       },
@@ -308,8 +319,8 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-      ),
+              );
+      } ),
     );
   }
 }

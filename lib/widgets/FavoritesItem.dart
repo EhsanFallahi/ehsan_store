@@ -1,16 +1,17 @@
 import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
+import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
+import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FavoritesItem extends StatelessWidget {
-  FavoritesController get _favoritesController => Get.find<FavoritesController>();
+  ProductController get _productController => Get.find<ProductController>();
   int id;
   String title;
   String description;
   String picture;
   double price;
-  String tag;
   bool is_favorites;
 
   FavoritesItem({this.id,
@@ -18,12 +19,11 @@ class FavoritesItem extends StatelessWidget {
     this.title,
     this.description,
     this.price,
-    this.tag,
     this.is_favorites});
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<FavoritesController>(() => FavoritesController());
+    Get.lazyPut<ProductController>(() => ProductController());
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
@@ -101,18 +101,6 @@ class FavoritesItem extends StatelessWidget {
                                 color: Color(0xffDE3C5D),
                                 letterSpacing: 4),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: FavoriteButton(
-                              isFavorite: is_favorites,
-                              valueChanged: (_isFavorite) {
-                                print('Is Favorite : $_isFavorite');
-                                // if(!is_favorites){
-                                //   _favoritesController.
-                                // }
-                              },
-                            ),
-                          )
                         ],
                       ),
                     ),

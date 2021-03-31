@@ -4,7 +4,7 @@ import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 abstract class AbstractCartRepository {
   Future<Response> addToCart(Cart cart);
   Future<Response> getAllCarts();
-  Future<Response> deleteCarts(Cart cart);
+  Future<Response> deleteCart(Cart cart);
 }
 
 class CartRepository implements AbstractCartRepository{
@@ -17,13 +17,13 @@ class CartRepository implements AbstractCartRepository{
   }
 
   @override
-  Future<Response> deleteCarts(Cart cart) {
-    return _dio.delete('/cart',data:cart );
+  Future<Response> getAllCarts() {
+    return _dio.get('/cart');
   }
 
   @override
-  Future<Response> getAllCarts() {
-    return _dio.get('/cart');
+  Future<Response> deleteCart(Cart cart) {
+    return _dio.delete('/cart/${cart.id}', data: cart);
   }
 
 }

@@ -19,7 +19,7 @@ class FavoritesRepository implements AbstractFavoritesRepository{
 
   @override
   Future<Response> deleteFavorites(Favorites favorites) {
-    return _dio.delete('/favorites',data:favorites );
+    return _dio.delete('/favorites/${favorites.id}', data: favorites);
   }
 
   @override

@@ -4,7 +4,7 @@ class Favorites {
   String description;
   String picture;
   double price;
-  String tag;
+
   bool is_favorites;
 
   Favorites({this.id,
@@ -12,7 +12,7 @@ class Favorites {
     this.title,
     this.description,
     this.price,
-    this.tag,
+
     this.is_favorites});
 
   void fromJson(dynamic json) {
@@ -21,7 +21,7 @@ class Favorites {
     title = json['title'];
     description = json['description'];
     price = json['price'];
-    tag = json['tag'];
+
     is_favorites = json['is_favorites'];
   }
 
@@ -32,7 +32,7 @@ class Favorites {
     data['description'] = this.description;
     data['picture'] = this.picture;
     data['price'] = this.price;
-    data['tag'] = this.tag;
+
     data['is_favorites'] = this.is_favorites;
     return data;
   }

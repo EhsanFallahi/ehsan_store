@@ -62,14 +62,6 @@ class AdminController extends GetxController {
     }
   }
 
-  // deleteAdmin(Admin admin) {
-  //   try {
-  //     isLoading(true);
-  //     _adminRepository.deleteAdmin(admin);
-  //     isLoading(false);
-  //   } catch (error) {
-  //     print('network error:$error');
-  //   }
 
   void deleteAdmin(Admin admin)async{
     isLoading(true);
