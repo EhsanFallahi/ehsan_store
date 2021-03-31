@@ -6,7 +6,7 @@ import 'package:ehsan_store/data_source/model/admin/Admin.dart';
 abstract class AbstractAdminRepository {
   Future<Response> addAdmin(Admin admin);
   Future<Response> getAllAdmins();
-  Future<Response> deleteAdmin(int id);
+  Future<Response> deleteAdmin(Admin admin);
 }
 
 class AdminRepository implements AbstractAdminRepository {
@@ -29,7 +29,12 @@ class AdminRepository implements AbstractAdminRepository {
   }
 
   @override
-  Future<Response> deleteAdmin(int id) {
-    return _dio.delete('/admin/$id');
+  Future<Response> deleteAdmin(Admin admin) {
+    return _dio.delete('/admin/${admin.id}', data: admin);
+  }
+
+  @override
+  Future<Response> getSelectedProducts(int id) {
+    return _dio.get('/product/$id');
   }
 }

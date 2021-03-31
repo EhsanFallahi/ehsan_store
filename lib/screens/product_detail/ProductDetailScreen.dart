@@ -25,7 +25,6 @@ class ProductDetailScreen extends StatelessWidget {
     Get.lazyPut<FavoritesController>(() => FavoritesController());
     Get.lazyPut<CartController>(() => CartController());
 
-    // final productDetail = Products().getProduct(productId);
 
     final appBar = AppBar(
       centerTitle: true,
@@ -82,7 +81,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       _productDetailController
                                           .tempSelectedProduct.value.title,
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
                                           letterSpacing: 2),
@@ -93,7 +92,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   _productDetailController
                                       .tempSelectedProduct.value.description,
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 16),
+                                      color: Colors.black87, fontSize: 16),
                                 ),
                               ),
                             )
@@ -113,8 +112,7 @@ class ProductDetailScreen extends StatelessWidget {
                               vertical: 30, horizontal: 20),
                           child: Row(
                             children: [
-                              Flexible(
-                                flex: 1,
+                              Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 5),
                                   child: Container(

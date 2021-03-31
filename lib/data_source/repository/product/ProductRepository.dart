@@ -6,6 +6,7 @@ abstract class AbstractProductRepository {
   Future<Response> getAllProducts();
   Future<Response> getSelectedProducts(int id);
   Future<Response> updateProduct(Product product);
+  Future<Response> deleteProduct(Product product);
 }
 
 class ProductRepository implements AbstractProductRepository{
@@ -31,5 +32,12 @@ class ProductRepository implements AbstractProductRepository{
   Future<Response> getSelectedProducts(int id) {
     return _dio.get('/product/$id');
   }
+
+  @override
+  Future<Response> deleteProduct(Product product) {
+    return _dio.delete('/product/${product.id}', data: product);
+  }
+
+
 
 }

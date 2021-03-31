@@ -1,12 +1,12 @@
 import 'package:ehsan_store/screens/admin/add_admin/AddAdminScreen.dart';
 import 'package:ehsan_store/screens/admin/add_product/AddProductAdminScreen.dart';
-import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetail.dart';
-import 'package:ehsan_store/screens/admin/product_edit/ProductEdit.dart';
+import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
+import 'package:ehsan_store/screens/admin/product_edit/ProductEditScreen.dart';
 import 'package:ehsan_store/screens/cart/CartScreen.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:ehsan_store/screens/favorite/FavoritesScreen.dart';
 import 'package:ehsan_store/screens/login/LoginScreen.dart';
-import 'package:ehsan_store/screens/product_detail/ProductDetail.dart';
+import 'package:ehsan_store/screens/product_detail/ProductDetailScreen.dart';
 import 'package:ehsan_store/screens/register/RegisterScreen.dart';
 import 'package:ehsan_store/screens/settings/ProfileSetting.dart';
 import 'package:ehsan_store/screens/splash/SplashScreen.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xfF474546),
       ),
       debugShowCheckedModeBanner: false,
-      home:Produ(),
+      home:LoginScreen(),
     );
   }
 }

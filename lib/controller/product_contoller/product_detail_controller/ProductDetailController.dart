@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController{
   ProductRepository _productRepository = ProductRepository();
-  FavoritesRepository _favoritesRepository = FavoritesRepository();
   final productId = Get.arguments;
 
   dynamic _selectedProduct = Product().obs;

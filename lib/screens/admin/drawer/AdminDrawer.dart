@@ -1,4 +1,6 @@
 import 'package:ehsan_store/screens/admin/add_admin/AddAdminScreen.dart';
+import 'package:ehsan_store/screens/login/LoginScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +47,7 @@ class AdminDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.add_box_rounded,color: Colors.black,),
+              leading: Icon(Icons.add_box_rounded,color:SECONDARY_COLOR,),
               onTap: (){
                 Get.to(AddAdminScreen());
               },
@@ -54,6 +56,23 @@ class AdminDrawer extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white
+                ),
+              ),
+            ),
+            Divider(
+              color: Colors.white60,
+              height: 2,
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app_rounded,color: PRIMARY_COLOR,),
+              onTap: (){
+                Get.off(()=>LoginScreen());
+              },
+              title: Text(
+                'Exit',
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white
                 ),
               ),
             ),

@@ -111,7 +111,10 @@ class LoginScreen extends StatelessWidget {
                                 _loginController.changeDisplayPassword.value =
                                     !_loginController
                                         .changeDisplayPassword.value;
-                              })),
+
+                              }
+                              )
+                      ),
                     ),
                   ),
                 ),

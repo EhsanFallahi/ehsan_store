@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ehsan_store/data_source/model/admin/Admin.dart';
 import 'package:ehsan_store/data_source/model/user/User.dart';
 import 'package:ehsan_store/data_source/repository/login/LoginRepository.dart';
-import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetail.dart';
+import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
@@ -53,7 +53,7 @@ class LoginController extends GetxController {
       }
       if (isValidateAdmin(userName, password)) {
         isLoading(false);
-        Get.off(AdminProductDetail(),arguments: userName);
+        Get.off(AdminProductDetailScreen(),arguments: userName);
       }
   }
 

@@ -205,6 +205,17 @@ class AddAdminScreen extends StatelessWidget {
                                   letterSpacing: 1,
                                 ),
                               ),
+                              trailing: IconButton(
+                                icon: Icon(Icons.delete_forever_rounded,color:SECONDARY_COLOR),
+                                onPressed: (){
+                                  _adminController.deleteAdmin(Admin(
+                                    id:  _adminController.tempListAdmins[i].id,
+                                    userName:  _adminController.tempListAdmins[i].userName,
+                                    password:  _adminController.tempListAdmins[i].password
+                                  ));
+                                  _adminController.getALLAdmins();
+                                },
+                              ),
 
                             ),
 

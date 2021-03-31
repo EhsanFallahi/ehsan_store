@@ -1,8 +1,13 @@
+import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
+import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddProductAdminScreen extends StatelessWidget {
+  ProductController get _productController => Get.find<ProductController>();
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ProductController>(() => ProductController());
     final appBar = AppBar(
       centerTitle: true,
       elevation: 0,
@@ -10,7 +15,7 @@ class AddProductAdminScreen extends StatelessWidget {
       leading: Padding(
         padding: EdgeInsets.all(4),
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {return;},
           child: Text(
             'Cancel',
             style: TextStyle(
@@ -26,7 +31,20 @@ class AddProductAdminScreen extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(4),
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              _productController.addProduct(Product(
+                picture: 'https://assets.ajio.com/medias/sys_master/root/h6b/hbb/15281228087326/-473Wx593H-461089583-grey-MODEL.jpg',
+                title: _productController.titleController.text.trim().toLowerCase(),
+                description: _productController.descriptinController.text.trim().toString().toLowerCase(),
+                price: double.parse(_productController.priceController.text.trim()),
+                amount:int.parse(_productController.amountController.text.trim()) ,
+                is_display: true,
+                tag: _productController.tagController.text.trim().toLowerCase(),
+                is_favorites: false
+
+              ));
+              _productController.getAllProducts();
+            },
             child: Text(
               'Save',
               style: TextStyle(
@@ -111,7 +129,8 @@ class AddProductAdminScreen extends StatelessWidget {
                 child: TextFormField(
                   style: TextStyle(color: Color(0xfF0496E2)),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // controller: nameController,
+                  controller: _productController.titleController,
+                  maxLength: 12,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter some text';
@@ -135,13 +154,14 @@ class AddProductAdminScreen extends StatelessWidget {
                 child: TextFormField(
                   style: TextStyle(color: Color(0xfF0496E2)),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // controller: nameController,
+                  controller: _productController.descriptinController,
+                  maxLength: 100,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter some text';
                     }
-                    if (value.length < 20) {
-                      return 'Must be more than 20 charater';
+                    if (value.length < 30) {
+                      return 'Must be more than 30 charater';
                     } else
                       return null;
                   },
@@ -160,16 +180,17 @@ class AddProductAdminScreen extends StatelessWidget {
                 child: TextFormField(
                   style: TextStyle(color: Color(0xfF0496E2)),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // controller: nameController,
-                  // validator: (value) {
-                  //   if (value.isEmpty) {
-                  //     return 'Please enter some text';
-                  //   }
-                  //   if (value.length < 20) {
-                  //     return 'Must be more than 20 charater';
-                  //   } else
-                  //     return null;
-                  // },
+                  controller: _productController.priceController,
+                  maxLength: 6,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    if (value.length < 5) {
+                      return 'Must be more than 2 charater';
+                    } else
+                      return null;
+                  },
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -184,13 +205,14 @@ class AddProductAdminScreen extends StatelessWidget {
                 child: TextFormField(
                   style: TextStyle(color: Color(0xfF0496E2)),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // controller: nameController,
+                  controller: _productController.tagController,
+                  maxLength: 15,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter some text';
                     }
-                    if (value.length < 10) {
-                      return 'Must be more than 10 charater';
+                    if (value.length < 5) {
+                      return 'Must be more than 5 charater';
                     } else
                       return null;
                   },
@@ -210,17 +232,18 @@ class AddProductAdminScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: 15,right: 15,top: 8),
                   child: TextFormField(
                     style: TextStyle(color: Color(0xfF0496E2)),
+                    maxLength: 3,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    // controller: nameController,
-                    // validator: (value) {
-                    //   if (value.isEmpty) {
-                    //     return 'Please enter some text';
-                    //   }
-                    //   if (value.length < 20) {
-                    //     return 'Must be more than 20 charater';
-                    //   } else
-                    //     return null;
-                    // },
+                    controller: _productController.amountController,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (value.length < 1) {
+                        return 'Must be more than 1charater';
+                      } else
+                        return null;
+                    },
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),

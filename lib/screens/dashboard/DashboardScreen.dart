@@ -86,16 +86,18 @@ class DashboardScreen extends StatelessWidget {
                 Container(
                   height: listHeight,
                   child: ListView.builder(
-                    itemCount: _productController.tempListProducts.length,
-                      itemBuilder: (_, i) => ProductItem(
-                            id: _productController.tempListProducts[i].id,
-                            picture: _productController.tempListProducts[i].picture,
-                            title: _productController.tempListProducts[i].title,
-                            description: _productController.tempListProducts[i].description,
-                            price: _productController.tempListProducts[i].price,
-                            amount: _productController.tempListProducts[i].amount,
-                            tag: _productController.tempListProducts[i].tag,
-                          )
+                    itemCount: _productController.listUserProducts.length,
+                      itemBuilder: (_, i) {
+                        return ProductItem(
+                          id: _productController.listUserProducts[i].id,
+                          picture: _productController.listUserProducts[i].picture,
+                          title: _productController.listUserProducts[i].title,
+                          description: _productController.listUserProducts[i].description,
+                          price: _productController.listUserProducts[i].price,
+                          amount: _productController.listUserProducts[i].amount,
+                          tag: _productController.listUserProducts[i].tag,
+                        );
+                      }
                   ),
                 )
               ],
