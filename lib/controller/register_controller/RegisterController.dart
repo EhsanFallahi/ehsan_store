@@ -2,6 +2,7 @@ import 'package:ehsan_store/data_source/model/admin/Admin.dart';
 import 'package:ehsan_store/data_source/model/user/User.dart';
 import 'package:ehsan_store/data_source/repository/login/LoginRepository.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,10 +20,13 @@ class RegisterController extends GetxController{
 
   void registerUser(User user, String confirmPassword) async {
     isLoading(true);
-    if (user.password == confirmPassword) {
+    await _registerUser(user, confirmPassword);
+  }
+
+  Future _registerUser(User user, String confirmPassword) async {
+     if (user.password == confirmPassword) {
       try {
         await _loginRepository.addUser(user);
-        print('user  added!');
         cleanTextFeilds();
         Get.off(DashboardScreen(),arguments:user.userName);
       } finally {
@@ -30,13 +34,7 @@ class RegisterController extends GetxController{
       }
     } else if (user.password != confirmPassword) {
       isLoading(false);
-      Get.snackbar('Wrong Confirm Password', 'Please Enter Corectly',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme
-              .of(Get.context)
-              .accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
+      showCustomSnackBar('Wrong Confirm Password', 'Please Enter Corectly');
     }
   }
 

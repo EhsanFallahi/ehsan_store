@@ -50,13 +50,7 @@ class DashboardScreen extends StatelessWidget {
                 )
               : SingleChildScrollView(
                   child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-                      ),
-                    ),
+                    decoration:gradientBackground(),
                     child: Column(
                       children: [
                         HeaderWithSearch(size: size),

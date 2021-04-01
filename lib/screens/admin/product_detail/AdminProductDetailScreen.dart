@@ -1,6 +1,7 @@
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/screens/admin/add_product/AddProductAdminScreen.dart';
 import 'package:ehsan_store/screens/admin/drawer/AdminDrawer.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/AdminProductItem.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,7 @@ class AdminProductDetailScreen extends StatelessWidget {
           : Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-                ),
-              ),
+              decoration: gradientBackground(),
               child: Stack(children: [
                 HeaderWithoutSearch(
                   title: 'Product Details',

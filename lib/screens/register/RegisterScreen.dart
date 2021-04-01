@@ -3,25 +3,25 @@ import 'dart:html';
 import 'package:ehsan_store/controller/login_controller/LoginController.dart';
 import 'package:ehsan_store/controller/register_controller/RegisterController.dart';
 import 'package:ehsan_store/data_source/model/user/User.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/UserNameTextFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterationScreen extends StatelessWidget {
   RegisterController get _registerController => Get.find<RegisterController>();
+  // LoginController get _registerController => Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<RegisterController>(() => RegisterController());
+    Get.lazyPut<RegisterController>(() =>RegisterController());
 
     return Scaffold(body: mainBody(context));
   }
 
   Container mainBody(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: gradientBackground(),
-      ),
+      decoration: gradientBackground(),
       child: Form(
         key: _registerController.formKey,
         child: Padding(
@@ -201,13 +201,5 @@ class RegisterationScreen extends StatelessWidget {
               letterSpacing: 10,
               fontSize: 35),
         ));
-  }
-
-  LinearGradient gradientBackground() {
-    return LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: <Color>[Color(0xfF474546), Color(0xfF000000)],
-    );
   }
 }

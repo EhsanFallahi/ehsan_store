@@ -1,7 +1,4 @@
-import 'package:ehsan_store/controller/cart_controller/CartController.dart';
-import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
-import 'package:ehsan_store/controller/product_contoller/product_detail_controller/ProductDetailController.dart';
 import 'package:ehsan_store/data_source/model/cart/Cart.dart';
 import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
 import 'package:ehsan_store/widgets/BorderedContainer.dart';

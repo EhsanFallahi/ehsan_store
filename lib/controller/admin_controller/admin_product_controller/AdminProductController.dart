@@ -9,6 +9,7 @@ class AdminProductController extends GetxController {
   AdminRepository _adminRepository = AdminRepository();
   final neededProductsDetails = Get.arguments;
 
+
   dynamic _selectedProduct = Product().obs;
   var tempSelectedProduct = Product().obs;
   RxInt amountCounter = 0.obs;
@@ -25,27 +26,23 @@ class AdminProductController extends GetxController {
 
   @override
   void onInit() async {
-    print('in on init start');
     titleController = TextEditingController(text: neededProductsDetails[1]);
-    print('in on init start title is: $titleController');
     descriptionController = TextEditingController(text: neededProductsDetails[2]);
-    print('in on init desc is: $descriptionController');
     priceController = TextEditingController(text: neededProductsDetails[3].toString());
-    print('in on init price is : $priceController');
     tagController = TextEditingController(text: neededProductsDetails[4]);
     picture=neededProductsDetails[7];
     isFavorites=neededProductsDetails[8];
-    print('in on init picture is : $picture');
-    print('on init id is: ${neededProductsDetails[0]}');
     getSelectedProduct();
     amountCounter.value = neededProductsDetails[5];
-    print('on init amountCounter is: ${neededProductsDetails[1]}');
     changeDisplayProduct.value = neededProductsDetails[6];
-    print('on init hangeDisplayProduct is: ${neededProductsDetails[2]}');
     super.onInit();
   }
 
   void getSelectedProduct() {
+    _getSelectedProduct();
+  }
+
+  void _getSelectedProduct() {
     try {
       isLoading(true);
       _adminRepository.getSelectedProducts(neededProductsDetails[0]).then((

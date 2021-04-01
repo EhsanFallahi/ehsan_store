@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ehsan_store/data_source/model/admin/Admin.dart';
 import 'package:ehsan_store/data_source/model/user/User.dart';
+import 'package:ehsan_store/data_source/repository/admin/AdminReposoitoty.dart';
 import 'package:ehsan_store/data_source/repository/login/LoginRepository.dart';
 import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
@@ -8,6 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 
 class LoginController extends GetxController {
+  LoginRepository _loginRepository = LoginRepository();
+  final GlobalKey<FormState> formKey = GlobalKey();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  RxBool changeDisplayPassword = false.obs;
+  RxBool isLoading = false.obs;
 
   List<dynamic> _allUsers = [];
   List<User> _tempListUsers = [];
@@ -36,13 +44,7 @@ class LoginController extends GetxController {
     }
   }
 
-  LoginRepository _loginRepository = LoginRepository();
-  final GlobalKey<FormState> formKey = GlobalKey();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
-  RxBool changeDisplayPassword = false.obs;
-  RxBool isLoading = false.obs;
 
   void loginPerson(String userName, String password) async {
       if (isValidateUser(userName, password)) {

@@ -1,6 +1,6 @@
-import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/FavoritesItem.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
 import 'package:favorite_button/favorite_button.dart';
@@ -22,13 +22,7 @@ class FavoritesScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-                ),
-              ),
+              decoration: gradientBackground(),
               child: Column(
                 children: [
                   HeaderWithoutSearch(

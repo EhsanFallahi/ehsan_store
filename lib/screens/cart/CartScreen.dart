@@ -1,4 +1,3 @@
-import 'package:ehsan_store/controller/cart_controller/CartController.dart';
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/CartItem.dart';
@@ -25,13 +24,7 @@ class CartScreen extends StatelessWidget {
 
   Container mainBody(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-        ),
-      ),
+      decoration: gradientBackground(),
       child: SafeArea(
         child: Column(children: [
           HeaderWithoutSearch(title: 'Your Cart'),
@@ -40,7 +33,7 @@ class CartScreen extends StatelessWidget {
           ),
           if (_productController.tempListCarts.length > 0)
             Container(
-              height: MediaQuery.of(context).size.height*0.6,
+              height: MediaQuery.of(context).size.height * 0.6,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -105,7 +98,8 @@ class CartScreen extends StatelessWidget {
                 confirmTextColor: Colors.white,
                 onConfirm: () {
                   Navigator.pop(context);
-                  _productController.showPurchseSnackBar();
+                  showCustomSnackBar(
+                      'Complete the purchase', 'thanks for your shopping');
                 });
           },
         ),

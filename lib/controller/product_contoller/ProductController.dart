@@ -7,6 +7,7 @@ import 'package:ehsan_store/data_source/repository/product/ProductRepository.dar
 import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
 import 'package:ehsan_store/screens/cart/CartScreen.dart';
 import 'package:ehsan_store/screens/favorite/FavoritesScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,16 +17,18 @@ class ProductController extends GetxController {
   CartRepository _cartRepository = CartRepository();
 
   List<dynamic> _allProduct = [].obs;
-  var tempListProducts =List<Product>().obs;
-  var listUserProducts=List<Product>().obs;
+  var tempListProducts = List<Product>().obs;
+  var listUserProducts = List<Product>().obs;
 
   List<dynamic> _allFavorites = [];
-  var tempListFavorites =List<Favorites>().obs;
+  var tempListFavorites = List<Favorites>().obs;
 
   List<dynamic> _allCarts = [];
-  var tempListCarts =List<Cart>().obs();
+  var tempListCarts = List<Cart>().obs();
 
   RxBool isLoading = false.obs;
+  RxBool isAddedProduct = false.obs;
+  RxDouble amountCounter = 1.0.obs;
 
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController titleController = TextEditingController();
@@ -33,8 +36,6 @@ class ProductController extends GetxController {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController tagController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
-  RxBool isAddedProduct = false.obs;
-  RxDouble amountCounter=1.0.obs;
 
   @override
   void onInit() async {
@@ -45,100 +46,39 @@ class ProductController extends GetxController {
     visibleProductListUser();
   }
 
-
-
-
-  void updateProduct(Product product)async{
+  void updateProduct(Product product) async {
     isLoading(true);
-        try{
+    await _updateProduct(product);
+  }
+
+  Future _updateProduct(Product product) async {
+    try {
       await _productRepository.updateProduct(product);
       isAddedProduct(true);
       Get.off(AdminProductDetailScreen());
-      showUpdateProductSnackBar();
-        }catch(error){
+      showCustomSnackBar('Product Updated', 'You have Update a Product');
+    } catch (error) {
       isAddedProduct(false);
       isLoading(false);
       print('network error:$error');
-    }finally{
-    isLoading(false);
+    } finally {
+      isLoading(false);
     }
   }
 
-  void deleteProduct(Product product)async{
+  void deleteProduct(Product product) async {
     isLoading(true);
-    try{
+    await _deleteProduct(product);
+  }
+
+  Future _deleteProduct(Product product) async {
+    try {
       await _productRepository.deleteProduct(product);
-      print('deleted product');
       isAddedProduct(false);
       Get.off(AdminProductDetailScreen());
-      showDeletedProductSnackBar();
-    }catch(error){
+      showCustomSnackBar('Product Deleted', 'You have Deleted a Product');
+    } catch (error) {
       isAddedProduct(true);
-      isLoading(false);
-      print('network error:$error');
-    }finally{
-      isLoading(false);
-    }
-  }
-  void getAllProducts(){
-    if(isAddedProduct.value){
-      return;
-    }else{
-      try {
-        isLoading(true);
-        _productRepository.getAllProducts().then((response) {
-          isAddedProduct(true);
-          isLoading(false);
-          _allProduct.addAll(response.data);
-          initialTempListAllProducts() ;
-          visibleProductListUser();
-          print('onInit products is$listUserProducts');
-        });
-      } catch (error) {
-        isAddedProduct(false);
-        isLoading(false);
-        print('network error:$error');
-      }
-    }
-  }
-
-  void getAllFavorites(){
-    if(isAddedProduct.value){
-      return;
-    }else{
-      print('getAllFavorites():');
-      try {
-        isLoading(true);
-        print('getAllFavorites():try   isLoading(true);');
-        _favoritesRepository.getAllFavorites().then((response) {
-          isAddedProduct(true);
-          isLoading(false);
-          print('getAllFavorites():try   isLoading(true);');
-          _allFavorites.addAll(response.data);
-          print('getAllFavorites():try   _allFavorites.addAll(response.data)');
-          initialTempListAllFavorites();
-          print('temp favorites lenght in getAll is: ${tempListFavorites.length}');
-        });
-      } catch (error) {
-        isAddedProduct(false);
-        isLoading(false);
-        print('network error:$error');
-      }
-    }
-
-  }
-
-  void addFavorites(Favorites favorites) async {
-    print('on product deatil favorites is:$favorites.');
-    try {
-      isLoading(true);
-      await _favoritesRepository.addFavorites(favorites);
-      tempListFavorites.add(favorites);
-      isAddedProduct(true);
-      print('favorites added is:${favorites.toString()}');
-      showSnackBar();
-    }catch(error){
-      isAddedProduct(false);
       isLoading(false);
       print('network error:$error');
     } finally {
@@ -146,100 +86,178 @@ class ProductController extends GetxController {
     }
   }
 
-  void deleteFavorites(Favorites favorites)async{
-    print('deleteFavorites');
-    isLoading(true);
-    try{
-      print('try');
-      await _favoritesRepository.deleteFavorites(favorites);
-      print('deleted favorites');
-      isAddedProduct(false);
-      Get.off(()=>FavoritesScreen());
-    }catch(error){
-      isAddedProduct(true);
-      isLoading(false);
-      print('network error:$error');
-    }finally{
-      isLoading(false);
-    }
-  }
-
-  void addProduct(Product product)async{
-    isLoading(true);
-    try{
-      await _productRepository.addProduct(product);
-      print('added product');
-      tempListProducts.add(product);
-      isAddedProduct(true);
-      Get.off(AdminProductDetailScreen());
-      showAddedProductSnackBar();
-    }catch(error){
-      isAddedProduct(false);
-      isLoading(false);
-      print('network error:$error');
-    }finally{
-      isLoading(false);
-    }
-  }
-
-  void addCart(Cart cart) async {
-    try {
-      isLoading(true);
-      await _cartRepository.addToCart(cart);
-      tempListCarts.add(cart);
-      isAddedProduct(true);
-      showAddedCartSnackBa();
-      print('cart  added!');
-    }catch(error){
-      isAddedProduct(false);
-      isLoading(false);
-      print('network error:$error');
-    } finally {
-      isLoading(false);
-    }
-  }
-  void deleteCart(Cart cart)async{
-    isLoading(true);
-    try{
-      await _cartRepository.deleteCart(cart);
-      print('deleted cart');
-      isAddedProduct(false);
-      Get.off(()=>CartScreen());
-    }catch(error){
-      isAddedProduct(true);
-      isLoading(false);
-      print('network error:$error');
-    }finally{
-      isLoading(false);
-    }
-  }
-
-  void getAllCarts(){
-    if(isAddedProduct.value){
+  void getAllProducts() {
+    if (isAddedProduct.value) {
       return;
-    }else{
+    } else {
+      _getAllProduct();
+    }
+  }
+
+  void _getAllProduct() {
     try {
       isLoading(true);
-      _cartRepository.getAllCarts().then((response) {
+      _productRepository.getAllProducts().then((response) {
         isAddedProduct(true);
         isLoading(false);
-        _allCarts.addAll(response.data);
-        initialTempListAllCarts() ;
-        print('onInit carts is$tempListCarts');
+        _allProduct.addAll(response.data);
+        initialTempListAllProducts();
+        visibleProductListUser();
       });
     } catch (error) {
       isAddedProduct(false);
       isLoading(false);
       print('network error:$error');
     }
+  }
+
+  void getAllFavorites() {
+    if (isAddedProduct.value) {
+      return;
+    } else {
+      _getAllFavorites();
     }
   }
 
-  void showAddedCartSnackBa()=>Get.snackbar('Carts', 'Added to your Cart',
-      snackPosition: SnackPosition.BOTTOM,
-      margin: EdgeInsets.all(8),
-      colorText: Theme.of(Get.context).accentColor,
-      backgroundColor: Colors.black87.withOpacity(0.8));
+  void _getAllFavorites() {
+    try {
+      isLoading(true);
+      _favoritesRepository.getAllFavorites().then((response) {
+        isAddedProduct(true);
+        isLoading(false);
+        _allFavorites.addAll(response.data);
+        initialTempListAllFavorites();
+      });
+    } catch (error) {
+      isAddedProduct(false);
+      isLoading(false);
+      print('network error:$error');
+    }
+  }
+
+  void getAllCarts() {
+    if (isAddedProduct.value) {
+      return;
+    } else {
+      _getAllCarts();
+    }
+  }
+
+  void _getAllCarts() {
+    try {
+      isLoading(true);
+      _cartRepository.getAllCarts().then((response) {
+        isAddedProduct(true);
+        isLoading(false);
+        _allCarts.addAll(response.data);
+        initialTempListAllCarts();
+      });
+    } catch (error) {
+      isAddedProduct(false);
+      isLoading(false);
+      print('network error:$error');
+    }
+  }
+
+  void addFavorites(Favorites favorites) async {
+    await _addFavorites(favorites);
+  }
+
+  Future _addFavorites(Favorites favorites) async {
+    try {
+      isLoading(true);
+      await _favoritesRepository.addFavorites(favorites);
+      tempListFavorites.add(favorites);
+      isAddedProduct(true);
+      showCustomSnackBar('Favorites', 'Added to your favorites');
+    } catch (error) {
+      isAddedProduct(false);
+      isLoading(false);
+      print('network error:$error');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void deleteFavorites(Favorites favorites) async {
+    isLoading(true);
+    await _deleteFavorites(favorites);
+  }
+
+  Future _deleteFavorites(Favorites favorites) async {
+    try {
+      await _favoritesRepository.deleteFavorites(favorites);
+      isAddedProduct(false);
+      Get.off(() => FavoritesScreen());
+    } catch (error) {
+      isAddedProduct(true);
+      isLoading(false);
+      print('network error:$error');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void addProduct(Product product) async {
+    isLoading(true);
+    await _addProduct(product);
+  }
+
+  Future _addProduct(Product product) async {
+      try {
+      await _productRepository.addProduct(product);
+      print('added product');
+      tempListProducts.add(product);
+      isAddedProduct(true);
+      Get.off(AdminProductDetailScreen());
+      showCustomSnackBar('Product Added', 'You have added a new Product');
+    } catch (error) {
+      isAddedProduct(false);
+      isLoading(false);
+      print('network error:$error');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void addCart(Cart cart) async {
+    await _addCart(cart);
+  }
+
+  Future _addCart(Cart cart) async {
+    try {
+      isLoading(true);
+      await _cartRepository.addToCart(cart);
+      tempListCarts.add(cart);
+      isAddedProduct(true);
+      showCustomSnackBar('Carts', 'Added to your Cart');
+    } catch (error) {
+      isAddedProduct(false);
+      isLoading(false);
+      print('network error:$error');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void deleteCart(Cart cart) async {
+    isLoading(true);
+    await _deleteCart(cart);
+  }
+
+  Future _deleteCart(Cart cart) async {
+    try {
+      await _cartRepository.deleteCart(cart);
+      isAddedProduct(false);
+      Get.off(() => CartScreen());
+    } catch (error) {
+      isAddedProduct(true);
+      isLoading(false);
+      print('network error:$error');
+    } finally {
+      isLoading(false);
+    }
+  }
 
   void initialTempListAllProducts() {
     for (var product in _allProduct) {
@@ -247,50 +265,7 @@ class ProductController extends GetxController {
       _tempProduct.fromJson(product);
       tempListProducts.add(_tempProduct);
     }
-
   }
-
-  visibleProductListUser() {
-    for (var product in tempListProducts) {
-      if (product.is_display) {
-        listUserProducts.add(product);
-      }
-    }
-  }
-
-  void showAddedProductSnackBar() =>
-      Get.snackbar('Product Added', 'You have added a new Product',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme.of(Get.context).accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
-
-  void showUpdateProductSnackBar() =>
-      Get.snackbar('Product Updated', 'You have Update a Product',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme.of(Get.context).accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
-
-  void showPurchseSnackBar() =>
-      Get.snackbar('Complete the purchase', 'thanks for your shopping',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme.of(Get.context).accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
-
-  void showDeletedProductSnackBar()  =>
-      Get.snackbar('Product Deleted', 'You have Deleted a Product',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme.of(Get.context).accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
-
-  void showSnackBar()=>Get.snackbar('Favorites', 'Added to your favorites',
-      snackPosition: SnackPosition.BOTTOM,
-      margin: EdgeInsets.all(8),
-      colorText: Theme.of(Get.context).accentColor,
-      backgroundColor: Colors.black87.withOpacity(0.8));
 
   void initialTempListAllFavorites() {
     for (var favorites in _allFavorites) {
@@ -308,5 +283,11 @@ class ProductController extends GetxController {
     }
   }
 
-
+  visibleProductListUser() {
+    for (var product in tempListProducts) {
+      if (product.is_display) {
+        listUserProducts.add(product);
+      }
+    }
+  }
 }

@@ -1,7 +1,4 @@
-import 'package:ehsan_store/controller/favorites_controller/FavoritesController.dart';
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
-import 'package:ehsan_store/data_source/model/favorites/Favorites.dart';
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

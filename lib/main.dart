@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         primaryColor: PRIMARY_COLOR,
       ),
       debugShowCheckedModeBanner: false,
-      home: AdminProductDetailScreen(),
+      home: SplashScreen(),
     );
   }
 }

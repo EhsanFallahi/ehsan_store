@@ -2,6 +2,7 @@ import 'package:ehsan_store/controller/admin_controller/admin_product_controller
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/DescriptionTextFormField.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
 import 'package:ehsan_store/widgets/PriceTextFormField.dart';
@@ -26,26 +27,30 @@ class ProductEditScreen extends StatelessWidget {
       centerTitle: true,
       elevation: 0,
       backgroundColor: Theme.of(context).primaryColor,
-      leading: Padding(
-        padding: EdgeInsets.all(4),
-        child: TextButton(
-          onPressed: () {
-            Get.off(() => AdminProductDetailScreen());
-          },
-          child: Text(
-            'Cancel',
-            style: TextStyle(
-              color: Colors.white,
-              decoration: TextDecoration.underline,
-              letterSpacing: 1,
-              fontSize: 12,
-            ),
-          ),
-        ),
-      ),
+      leading: buttonCancelAppBar(),
       actions: [saveButtonAppBar()],
     );
     return Scaffold(appBar: appBar, body: mainBody(context, appBar));
+  }
+
+  Padding buttonCancelAppBar() {
+    return Padding(
+      padding: EdgeInsets.all(4),
+      child: TextButton(
+        onPressed: () {
+          Get.off(() => AdminProductDetailScreen());
+        },
+        child: Text(
+          'Cancel',
+          style: TextStyle(
+            color: Colors.white,
+            decoration: TextDecoration.underline,
+            letterSpacing: 1,
+            fontSize: 12,
+          ),
+        ),
+      ),
+    );
   }
 
   Obx mainBody(BuildContext context, AppBar appBar) {
@@ -59,13 +64,7 @@ class ProductEditScreen extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height +
                     appBar.preferredSize.height,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-                  ),
-                ),
+                decoration: gradientBackground(),
                 child: Stack(children: [
                   HeaderWithoutSearch(
                     title: 'Product Edit',
@@ -77,16 +76,7 @@ class ProductEditScreen extends StatelessWidget {
                     child: Form(
                       key: _productController.formKey,
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.4,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Colors.white,
-                            image: productImage(),
-                          ),
-                          child: columnOfListItems(context),
-                        ),
+                        headerItemViews(context),
                         TitleTextFormField(
                           controller: _adminProductController.titleController,
                         ),
@@ -109,6 +99,23 @@ class ProductEditScreen extends StatelessWidget {
           ));
   }
 
+  Container headerItemViews(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.4,
+      width: double.infinity,
+      decoration: whiteBackground(),
+      child: columnOfListItems(context),
+    );
+  }
+
+  BoxDecoration whiteBackground() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      color: Colors.white,
+      image: productImage(),
+    );
+  }
+
   Column columnOfListItems(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -117,46 +124,66 @@ class ProductEditScreen extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 160,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Theme.of(context).primaryColor.withOpacity(0.8)),
+            decoration: boxDecoration(context),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      titleItem(),
-                      descriptionItem(),
-                      priceItem(),
-                    ]),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    deleteIconButton(context),
-                    visibilityIconButton(context),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: amountCounter(),
-                      ),
-                    ),
-                  ),
-                ),
+                titleDescriptionPriceItems(),
+                visibiliteAndDeleteItem(context),
+                amountCounterItem(context),
               ],
             ),
           ),
         ]),
       ],
+    );
+  }
+
+  BoxDecoration boxDecoration(BuildContext context) {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).primaryColor.withOpacity(0.8));
+  }
+
+  Column titleDescriptionPriceItems() {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          titleItem(),
+          descriptionItem(),
+          priceItem(),
+        ]);
+  }
+
+  Column visibiliteAndDeleteItem(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        deleteIconButton(context),
+        visibilityIconButton(context),
+      ],
+    );
+  }
+
+  Padding amountCounterItem(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Theme.of(context).accentColor,
+            borderRadius: BorderRadius.circular(12)),
+        child: containerAmountCounter(),
+      ),
+    );
+  }
+
+  Container containerAmountCounter() {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: amountCounter(),
+      ),
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
+import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/AmountTextFormField.dart';
 import 'package:ehsan_store/widgets/DescriptionTextFormField.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
@@ -20,23 +22,7 @@ class AddProductAdminScreen extends StatelessWidget {
       centerTitle: true,
       elevation: 0,
       backgroundColor: Theme.of(context).primaryColor,
-      leading: Padding(
-        padding: EdgeInsets.all(4),
-        child: TextButton(
-          onPressed: () {
-            return;
-          },
-          child: Text(
-            'Cancel',
-            style: TextStyle(
-              color: Colors.white,
-              decoration: TextDecoration.underline,
-              letterSpacing: 1,
-              fontSize: 12,
-            ),
-          ),
-        ),
-      ),
+      leading: cancelButtonAppBar(),
       actions: [saveButtonAppBar()],
     );
     return Scaffold(
@@ -47,33 +33,61 @@ class AddProductAdminScreen extends StatelessWidget {
     );
   }
 
+  Padding cancelButtonAppBar() {
+    return Padding(
+      padding: EdgeInsets.all(4),
+      child: cancellButton(),
+    );
+  }
+
+  TextButton cancellButton() {
+    return TextButton(
+      onPressed: () {
+        Get.to(AdminProductDetailScreen());
+      },
+      child: titleCancel(),
+    );
+  }
+
+  Text titleCancel() {
+    return Text(
+      'Cancel',
+      style: TextStyle(
+        color: Colors.white,
+        decoration: TextDecoration.underline,
+        letterSpacing: 1,
+        fontSize: 12,
+      ),
+    );
+  }
+
   Container mainBody(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
+      decoration: gradientBackground(),
+      child: Form(
+          key:  _productController.formKey,
+          child: columnItemViews(context)),
+    );
+  }
+
+  Column columnItemViews(BuildContext context) {
+    return Column(
+      children: [
+        HeaderWithoutSearch(
+          title: 'Add Product',
         ),
-      ),
-      child: Column(
-        children: [
-          HeaderWithoutSearch(
-            title: 'Add Product',
-          ),
-          selectImage(context),
-          TitleTextFormField(controller: _productController.titleController),
-          DescriptionTextFormField(
-              controller: _productController.descriptinController),
-          PriceTextFormField(controller: _productController.priceController),
-          TagTextFormField(controller: _productController.tagController),
-          Align(
-            alignment: Alignment.topLeft,
-            child: AmountTextFormField(
-                controller: _productController.amountController),
-          ),
-        ],
-      ),
+        selectImage(context),
+        TitleTextFormField(controller: _productController.titleController),
+        DescriptionTextFormField(
+            controller: _productController.descriptinController),
+        PriceTextFormField(controller: _productController.priceController),
+        TagTextFormField(controller: _productController.tagController),
+        Align(
+          alignment: Alignment.topLeft,
+          child: AmountTextFormField(
+              controller: _productController.amountController),
+        ),
+      ],
     );
   }
 
@@ -81,34 +95,47 @@ class AddProductAdminScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Stack(
-        children: <Widget>[
-          CircleAvatar(
-            backgroundColor: Theme.of(context).primaryColor,
-            radius: 70,
-            child: ClipOval(
-              child: Image.asset(
-                '',
-                height: 150,
-                width: 150,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Positioned(
-              bottom: 1,
-              right: 1,
-              child: Container(
-                height: 40,
-                width: 40,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.add_a_photo_rounded,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  color: Colors.white,
-                ),
-              ))
-        ],
+        children: <Widget>[circleAvatar(context), buttonSelectPhoto(context)],
+      ),
+    );
+  }
+
+  Positioned buttonSelectPhoto(BuildContext context) {
+    return Positioned(
+        bottom: 1,
+        right: 1,
+        child: Container(
+          height: 40,
+          width: 40,
+          child: iconAddPhoto(context),
+        ));
+  }
+
+  IconButton iconAddPhoto(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        Icons.add_a_photo_rounded,
+        color: Theme.of(context).accentColor,
+      ),
+      color: Colors.white,
+    );
+  }
+
+  CircleAvatar circleAvatar(BuildContext context) {
+    return CircleAvatar(
+      backgroundColor: Theme.of(context).primaryColor,
+      radius: 70,
+      child: clipOval(),
+    );
+  }
+
+  ClipOval clipOval() {
+    return ClipOval(
+      child: Image.asset(
+        '',
+        height: 150,
+        width: 150,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -116,35 +143,43 @@ class AddProductAdminScreen extends StatelessWidget {
   Padding saveButtonAppBar() {
     return Padding(
       padding: EdgeInsets.all(4),
-      child: TextButton(
-        onPressed: () {
+      child: saveButton(),
+    );
+  }
+
+  TextButton saveButton() {
+    return TextButton(
+      onPressed: () {
           _productController.addProduct(Product(
               picture:
-                  'https://assets.ajio.com/medias/sys_master/root/h6b/hbb/15281228087326/-473Wx593H-461089583-grey-MODEL.jpg',
-              title:
-                  _productController.titleController.text.trim().toLowerCase(),
+              'https://assets.ajio.com/medias/sys_master/root/h6b/hbb/15281228087326/-473Wx593H-461089583-grey-MODEL.jpg',
+              title: _productController.titleController.text.trim()
+                  .toLowerCase(),
               description: _productController.descriptinController.text
                   .trim()
                   .toString()
                   .toLowerCase(),
-              price:
-                  double.parse(_productController.priceController.text.trim()),
-              amount:
-                  int.parse(_productController.amountController.text.trim()),
+              price: double.parse(
+                  _productController.priceController.text.trim()),
+              amount: int.parse(
+                  _productController.amountController.text.trim()),
               is_display: true,
               tag: _productController.tagController.text.trim().toLowerCase(),
               is_favorites: false));
           _productController.getAllProducts();
-        },
-        child: Text(
-          'Save',
-          style: TextStyle(
-            color: Colors.white,
-            decoration: TextDecoration.underline,
-            letterSpacing: 1,
-            fontSize: 12,
-          ),
-        ),
+      },
+      child: titleSave(),
+    );
+  }
+
+  Text titleSave() {
+    return Text(
+      'Save',
+      style: TextStyle(
+        color: Colors.white,
+        decoration: TextDecoration.underline,
+        letterSpacing: 1,
+        fontSize: 12,
       ),
     );
   }

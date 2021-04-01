@@ -1,3 +1,4 @@
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
 import 'package:flutter/material.dart';
 
@@ -166,16 +167,6 @@ class ProfileSetting extends StatelessWidget {
           fontSize: 20,
           letterSpacing: 1,
           color: Colors.white70),
-    );
-  }
-
-  BoxDecoration gradientBackground() {
-    return BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-      ),
     );
   }
 

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class AdminController extends GetxController {
   AdminRepository _adminRepository = AdminRepository();
-  final GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> adminFormKey = GlobalKey();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
