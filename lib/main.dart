@@ -10,25 +10,26 @@ import 'package:ehsan_store/screens/product_detail/ProductDetailScreen.dart';
 import 'package:ehsan_store/screens/register/RegisterScreen.dart';
 import 'package:ehsan_store/screens/settings/ProfileSetting.dart';
 import 'package:ehsan_store/screens/splash/SplashScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ehsan Store',
       theme: ThemeData(
         hintColor: Colors.white10,
-        accentColor: Color(0xfF0496E2),
-        primaryColor: Color(0xfF474546),
+        accentColor: SECONDARY_COLOR,
+        primaryColor: PRIMARY_COLOR,
       ),
       debugShowCheckedModeBanner: false,
-      home:DashboardScreen(),
+      home: AdminProductDetailScreen(),
     );
   }
 }

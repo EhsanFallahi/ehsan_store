@@ -24,7 +24,7 @@ class RegisterController extends GetxController{
         await _loginRepository.addUser(user);
         print('user  added!');
         cleanTextFeilds();
-        Get.off(DashboardScreen());
+        Get.off(DashboardScreen(),arguments:user.userName);
       } finally {
         isLoading(false);
       }
