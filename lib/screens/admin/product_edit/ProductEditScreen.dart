@@ -41,7 +41,7 @@ class ProductEditScreen extends StatelessWidget {
           Get.off(() => AdminProductDetailScreen());
         },
         child: Text(
-          'Cancel',
+          'cancel'.tr,
           style: TextStyle(
             color: Colors.white,
             decoration: TextDecoration.underline,
@@ -67,7 +67,7 @@ class ProductEditScreen extends StatelessWidget {
                 decoration: gradientBackground(),
                 child: Stack(children: [
                   HeaderWithoutSearch(
-                    title: 'Product Edit',
+                    title: 'product_edit'.tr,
                   ),
                   Positioned(
                     top: 80,
@@ -255,12 +255,9 @@ class ProductEditScreen extends StatelessWidget {
         onPressed: () {
           _adminProductController.changeDisplayProduct.value =
               !_adminProductController.changeDisplayProduct.value;
-          print(
-              'value is : ${_adminProductController.changeDisplayProduct.value}');
           if (!_adminProductController.changeDisplayProduct.value) {
             _adminProductController.tempSelectedProduct.value.is_display =
                 false;
-            print('this product is hidden for users');
           }
         });
   }
@@ -367,7 +364,7 @@ class ProductEditScreen extends StatelessWidget {
           }
         },
         child: Text(
-          'Save',
+          'save'.tr,
           style: TextStyle(
             color: Colors.white,
             decoration: TextDecoration.underline,

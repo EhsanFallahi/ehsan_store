@@ -52,7 +52,6 @@ class AdminProductController extends GetxController {
         Product _tempProduct = Product();
         _tempProduct.fromJson(_selectedProduct);
         tempSelectedProduct(_tempProduct);
-        print('on get method temp is: ${tempSelectedProduct}');
         ProductController().getAllProducts();
       });
     } catch (error) {

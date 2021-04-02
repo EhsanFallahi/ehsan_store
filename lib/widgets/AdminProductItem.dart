@@ -69,31 +69,8 @@ class AdminProductItem extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 160,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.8)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                titleItem(),
-                                descriptionItem(),
-                                priceItem(),
-                              ]),
-                          tagItem(),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              handelAmountColor(),
-                              amountItem(context),
-                            ],
-                          )
-                        ],
-                      ),
+                      decoration: boxDecoration(context),
+                      child: rowItemViews(context),
                     ),
                   ]),
                 ],
@@ -103,6 +80,36 @@ class AdminProductItem extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  Row rowItemViews(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              titleItem(),
+              descriptionItem(),
+              priceItem(),
+            ]),
+        tagItem(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            handelAmountColor(),
+            amountItem(context),
+          ],
+        )
+      ],
+    );
+  }
+
+  BoxDecoration boxDecoration(BuildContext context) {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).primaryColor.withOpacity(0.8));
   }
 
   Padding amountItem(BuildContext context) {
@@ -136,7 +143,7 @@ class AdminProductItem extends StatelessWidget {
 
   Text handelAmountColor() {
     return Text(
-      'Amount',
+      'amount'.tr,
       style: amount < 5
           ? TextStyle(
               color: Colors.red,

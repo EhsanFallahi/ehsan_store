@@ -10,6 +10,7 @@ import 'package:ehsan_store/screens/product_detail/ProductDetailScreen.dart';
 import 'package:ehsan_store/screens/register/RegisterScreen.dart';
 import 'package:ehsan_store/screens/settings/ProfileSetting.dart';
 import 'package:ehsan_store/screens/splash/SplashScreen.dart';
+import 'package:ehsan_store/translation/StoreTranslation.dart';
 import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ehsan Store',
+      translations: StoreTraslation(),
+      locale: Get.deviceLocale,
       theme: ThemeData(
         hintColor: Colors.white10,
         accentColor: SECONDARY_COLOR,

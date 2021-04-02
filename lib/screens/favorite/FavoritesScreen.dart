@@ -26,7 +26,7 @@ class FavoritesScreen extends StatelessWidget {
               child: Column(
                 children: [
                   HeaderWithoutSearch(
-                    title: 'Your Favorites',
+                    title: 'your_favorites'.tr,
                   ),
                   SizedBox(
                     height: 4,

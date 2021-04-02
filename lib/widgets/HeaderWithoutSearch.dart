@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class HeaderWithoutSearch extends StatelessWidget {
   final String title;
+
   HeaderWithoutSearch({this.title});
 
   @override

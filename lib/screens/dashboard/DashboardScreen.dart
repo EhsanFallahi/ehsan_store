@@ -6,7 +6,6 @@ import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
 import 'package:ehsan_store/screens/cart/CartScreen.dart';
 import 'package:ehsan_store/screens/drawer/MainDrawer.dart';
 import 'package:ehsan_store/util/Constant.dart';
-import 'package:ehsan_store/widgets/CategoryItem.dart';
 import 'package:ehsan_store/widgets/HeaderWithSearch.dart';
 import 'package:ehsan_store/widgets/MyAppBar.dart';
 import 'package:ehsan_store/widgets/ProductItem.dart';
@@ -50,7 +49,7 @@ class DashboardScreen extends StatelessWidget {
                 )
               : SingleChildScrollView(
                   child: Container(
-                    decoration:gradientBackground(),
+                    decoration: gradientBackground(),
                     child: Column(
                       children: [
                         HeaderWithSearch(size: size),
@@ -84,7 +83,7 @@ class DashboardScreen extends StatelessWidget {
   FloatingActionButton fAB(BuildContext context) {
     return FloatingActionButton.extended(
         elevation: 2,
-        label: Text('Search by Filter'),
+        label: Text('search_by_filter'.tr),
         icon: Icon(
           Icons.search_rounded,
           color: Colors.white,
@@ -119,7 +118,7 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Set Price Range',
+                'set_price_range'.tr,
                 style: TextStyle(color: Colors.white70),
               ),
               priceRangeItem(),
@@ -140,7 +139,7 @@ class DashboardScreen extends StatelessWidget {
       height: 40,
       width: 140,
       child: ElevatedButton(
-        child: Text('Search'),
+        child: Text('search'.tr),
         onPressed: () {},
         style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -161,7 +160,7 @@ class DashboardScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Title : ',
+            'title'.tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -181,7 +180,7 @@ class DashboardScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Description : ',
+            'description'.tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -201,7 +200,7 @@ class DashboardScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Tag : ',
+            'tag'.tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -245,7 +244,7 @@ class DashboardScreen extends StatelessWidget {
         // controller: nameController,
         validator: (value) {
           if (value.isEmpty) {
-            return 'Please enter some text';
+            return 'please_enter_some_text'.tr;
           } else
             return null;
         },
@@ -255,7 +254,7 @@ class DashboardScreen extends StatelessWidget {
             borderSide:
                 BorderSide(color: Theme.of(context).accentColor, width: 3),
           ),
-          labelText: 'The desired word',
+          labelText: 'the_desired_word'.tr,
         ),
       ),
     );

@@ -150,7 +150,7 @@ class ProductDetailScreen extends StatelessWidget {
 
   Text titleBuy() {
     return Text(
-      'BUY',
+      'buy'.tr,
       style: TextStyle(
           color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
     );
@@ -188,7 +188,7 @@ class ProductDetailScreen extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Price',
+          'price'.tr,
           style: TextStyle(fontSize: 16, color: Colors.white),
         ),
         Text(
@@ -203,7 +203,6 @@ class ProductDetailScreen extends StatelessWidget {
     return FavoriteButton(
       isFavorite: false,
       valueChanged: (_isFavorite) {
-        print('Is Favorite : $_isFavorite');
         if (_isFavorite) {
           _productController.addFavorites(Favorites(
               picture: picture,

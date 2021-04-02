@@ -21,14 +21,10 @@ class PopUp extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildHandle(context),
-          if (child != null)
-            child
-        ],
+        children: [_buildHandle(context), if (child != null) child],
       ),
     );
-}
+  }
 
   Widget _buildHandle(BuildContext context) {
     return FractionallySizedBox(

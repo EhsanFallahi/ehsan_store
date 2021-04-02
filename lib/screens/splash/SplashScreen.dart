@@ -41,7 +41,7 @@ class SplashScreen extends StatelessWidget {
 
   Text titleBuyOnline() {
     return Text(
-      'Buy Online!',
+      'buy_online'.tr,
       style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w200,

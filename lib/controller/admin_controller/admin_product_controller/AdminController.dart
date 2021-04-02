@@ -1,6 +1,7 @@
 import 'package:ehsan_store/data_source/model/admin/Admin.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/data_source/repository/admin/AdminReposoitoty.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,8 +30,7 @@ class AdminController extends GetxController {
       await _adminRepository.addAdmin(admin);
       tempListAdmins.add(admin);
       isAddedAdmin(true);
-      print('admin  added!');
-      showAddedAdminSnackBar();
+      showCustomSnackBar('admin_added'.tr, 'you_have_add_new_admin'.tr);
       cleanTextFeilds();
       // Get.off(DashboardScreen());
     } catch (error) {
@@ -52,7 +52,6 @@ class AdminController extends GetxController {
           isLoading(false);
           _allAdmins.addAll(response.data);
           initialTempListAllAdmins();
-          print('onInit admins is$tempListAdmins');
         });
       } catch (error) {
         isAddedAdmin(false);
@@ -67,8 +66,7 @@ class AdminController extends GetxController {
     isLoading(true);
     try{
       await _adminRepository.deleteAdmin(admin);
-      print('deleted product');
-      showDeletedAdminSnackBar();
+      showCustomSnackBar('admin_deleted'.tr, 'you_have_delete_admin'.tr);
     }catch(error){
       isLoading(false);
       print('network error:$error');
@@ -85,22 +83,10 @@ class AdminController extends GetxController {
     }
   }
 
-  void showAddedAdminSnackBar() =>
-      Get.snackbar('Admin Added', 'You have added a new admin',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme.of(Get.context).accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
 
   void cleanTextFeilds() {
     usernameController.text = '';
     passwordController.text = '';
   }
 
-  void showDeletedAdminSnackBar()=>
-      Get.snackbar('Admin Deleted', 'You have Deleted a Admin',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: EdgeInsets.all(8),
-          colorText: Theme.of(Get.context).accentColor,
-          backgroundColor: Colors.black87.withOpacity(0.8));
 }

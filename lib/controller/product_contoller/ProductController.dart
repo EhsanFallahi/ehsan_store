@@ -39,7 +39,6 @@ class ProductController extends GetxController {
 
   @override
   void onInit() async {
-    print('on init');
     getAllProducts();
     getAllFavorites();
     getAllCarts();
@@ -169,7 +168,7 @@ class ProductController extends GetxController {
       await _favoritesRepository.addFavorites(favorites);
       tempListFavorites.add(favorites);
       isAddedProduct(true);
-      showCustomSnackBar('Favorites', 'Added to your favorites');
+      showCustomSnackBar('favorites'.tr, 'added_to_your_favorites'.tr);
     } catch (error) {
       isAddedProduct(false);
       isLoading(false);
@@ -204,13 +203,13 @@ class ProductController extends GetxController {
   }
 
   Future _addProduct(Product product) async {
-      try {
+    try {
       await _productRepository.addProduct(product);
       print('added product');
       tempListProducts.add(product);
       isAddedProduct(true);
       Get.off(AdminProductDetailScreen());
-      showCustomSnackBar('Product Added', 'You have added a new Product');
+      showCustomSnackBar('added_product'.tr, 'you_have_added_a_new_product'.tr);
     } catch (error) {
       isAddedProduct(false);
       isLoading(false);
@@ -230,7 +229,7 @@ class ProductController extends GetxController {
       await _cartRepository.addToCart(cart);
       tempListCarts.add(cart);
       isAddedProduct(true);
-      showCustomSnackBar('Carts', 'Added to your Cart');
+      showCustomSnackBar('carts'.tr, 'added_to_your_cart'.tr);
     } catch (error) {
       isAddedProduct(false);
       isLoading(false);

@@ -1,5 +1,7 @@
 import 'package:ehsan_store/controller/login_controller/LoginController.dart';
+import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:ehsan_store/screens/favorite/FavoritesScreen.dart';
+import 'package:ehsan_store/screens/settings/ProfileSetting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,22 +31,7 @@ class MainDrawer extends StatelessWidget {
             color: Colors.white70,
             height: 1,
           ),
-          aboutUsItem(),
         ],
-      ),
-    );
-  }
-
-  ListTile aboutUsItem() {
-    return ListTile(
-      leading: Icon(
-        Icons.app_blocking_outlined,
-        color: Colors.black,
-      ),
-      onTap: () {},
-      title: Text(
-        'About Us',
-        style: TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
   }
@@ -59,7 +46,7 @@ class MainDrawer extends StatelessWidget {
         Get.to(FavoritesScreen());
       },
       title: Text(
-        'Favorites',
+        'favorites'.tr,
         style: TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
@@ -71,9 +58,11 @@ class MainDrawer extends StatelessWidget {
         Icons.settings,
         color: Colors.black,
       ),
-      onTap: () {},
+      onTap: () {
+        Get.to(ProfileSetting());
+      },
       title: Text(
-        'Setting',
+        'setting'.tr,
         style: TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
@@ -85,9 +74,11 @@ class MainDrawer extends StatelessWidget {
         Icons.home_rounded,
         color: Colors.black,
       ),
-      onTap: () {},
+      onTap: () {
+        Get.to(DashboardScreen());
+      },
       title: Text(
-        'Dashboard',
+        'dashboard'.tr,
         style: TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
@@ -106,7 +97,7 @@ class MainDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Hi',
+                'hi'.tr,
                 style: TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.w400,

@@ -16,10 +16,10 @@ class AmountTextFormField extends StatelessWidget {
         controller: controller,
         validator: (value) {
           if (value.isEmpty) {
-            return 'Please enter some text';
+            return 'please_enter_some_text';
           }
           if (value.length < 1) {
-            return 'Must be more than 1charater';
+            return 'Must be more than 1 charater';
           } else
             return null;
         },
@@ -28,7 +28,7 @@ class AmountTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: Colors.white70, width: 3),
           ),
-          labelText: 'Amount',
+          labelText: 'amount',
         ),
       ),
     );

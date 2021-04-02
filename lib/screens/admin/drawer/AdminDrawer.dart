@@ -65,7 +65,7 @@ class AdminDrawer extends StatelessWidget {
 
   Text titleExit() {
     return Text(
-      'Exit',
+      'exit'.tr,
       style: TextStyle(fontSize: 18, color: Colors.white),
     );
   }
@@ -93,7 +93,7 @@ class AdminDrawer extends StatelessWidget {
 
   Text titleAddAdmin() {
     return Text(
-      'Add Admin',
+      'add_admin'.tr,
       style: TextStyle(fontSize: 18, color: Colors.white),
     );
   }
@@ -136,7 +136,7 @@ class AdminDrawer extends StatelessWidget {
 
   Text titleWelcome() {
     return Text(
-      'Welcome',
+      'welcome'.tr,
       style: TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.w400,

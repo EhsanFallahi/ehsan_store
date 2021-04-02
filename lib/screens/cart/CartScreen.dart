@@ -12,7 +12,6 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<ProductController>(() => ProductController());
-    // final productDetail=Products().getProduct('1');
 
     final appBar = AppBar(
       centerTitle: true,
@@ -27,7 +26,7 @@ class CartScreen extends StatelessWidget {
       decoration: gradientBackground(),
       child: SafeArea(
         child: Column(children: [
-          HeaderWithoutSearch(title: 'Your Cart'),
+          HeaderWithoutSearch(title: 'your_cart'.tr),
           SizedBox(
             height: 10,
           ),
@@ -79,27 +78,27 @@ class CartScreen extends StatelessWidget {
         height: 40,
         width: 140,
         child: ElevatedButton(
-          child: Text('Buy'),
+          child: Text('buy'.tr),
           style: buttonStyle(),
           onPressed: () {
             Get.defaultDialog(
-                title: 'Purchase confirmation',
+                title: 'purchase_confirmation'.tr,
                 titleStyle: TextStyle(fontSize: 25, color: Colors.red),
                 middleTextStyle: TextStyle(fontSize: 21),
                 backgroundColor: PRIMARY_COLOR.withOpacity(0.8),
                 radius: 32,
                 content: titleDialogHeader(),
-                textCancel: 'Cancel',
+                textCancel: 'cancel'.tr,
                 cancelTextColor: Colors.white,
                 onCancel: () {
                   Navigator.pop(context);
                 },
-                textConfirm: 'Purchse',
+                textConfirm: 'purchase'.tr,
                 confirmTextColor: Colors.white,
                 onConfirm: () {
                   Navigator.pop(context);
-                  showCustomSnackBar(
-                      'Complete the purchase', 'thanks for your shopping');
+                  showCustomSnackBar('complete_the_purchase'.tr,
+                      'thanks_for_your_shopping'.tr);
                 });
           },
         ),
@@ -114,7 +113,7 @@ class CartScreen extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Do you confirm your shopping list?',
+            'do_you_confirm_your_shopping_list?'.tr,
             style: TextStyle(fontSize: 16, color: Colors.white60),
           ),
           SizedBox(
@@ -183,7 +182,7 @@ class CartScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            'Total:',
+            'total'.tr,
             style: TextStyle(
               color: Colors.white,
               fontSize: 21,

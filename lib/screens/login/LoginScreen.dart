@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
     return OutlineButton(
       textColor: Colors.white,
       color: Colors.blue,
-      child: Text('Register'),
+      child: Text('register'.tr),
       onPressed: () {
         cleanTextFeilds();
         Get.to(RegisterationScreen());
@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
       width: 140,
       height: 40,
       child: ElevatedButton(
-        child: Text('Login'),
+        child: Text('login'.tr),
         style: buttonStyle(),
         onPressed: () {
           if (_loginController.formKey.currentState.validate()) {
@@ -122,10 +122,10 @@ class LoginScreen extends StatelessWidget {
           style: TextStyle(color: Color(0xfF0496E2)),
           validator: (value) {
             if (value.isEmpty) {
-              return 'Please enter some text';
+              return 'please_enter_some_text'.tr;
             }
             if (value.length < 6) {
-              return 'Must be more than 6 charater';
+              return 'must_be_more_than_6_character'.tr;
             } else
               return null;
           },
@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.white70, width: 3),
               ),
-              labelText: 'Password',
+              labelText: 'password'.tr,
               suffixIcon: IconButton(
                   icon: Obx(
                     () => Icon(
@@ -168,7 +168,7 @@ class LoginScreen extends StatelessWidget {
         alignment: Alignment.center,
         padding: EdgeInsets.all(10),
         child: Text(
-          'Login',
+          'login'.tr,
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

@@ -65,8 +65,7 @@ class AddProductAdminScreen extends StatelessWidget {
     return Container(
       decoration: gradientBackground(),
       child: Form(
-          key:  _productController.formKey,
-          child: columnItemViews(context)),
+          key: _productController.formKey, child: columnItemViews(context)),
     );
   }
 
@@ -74,7 +73,7 @@ class AddProductAdminScreen extends StatelessWidget {
     return Column(
       children: [
         HeaderWithoutSearch(
-          title: 'Add Product',
+          title: 'add_product'.tr,
         ),
         selectImage(context),
         TitleTextFormField(controller: _productController.titleController),
@@ -150,23 +149,20 @@ class AddProductAdminScreen extends StatelessWidget {
   TextButton saveButton() {
     return TextButton(
       onPressed: () {
-          _productController.addProduct(Product(
-              picture:
-              'https://assets.ajio.com/medias/sys_master/root/h6b/hbb/15281228087326/-473Wx593H-461089583-grey-MODEL.jpg',
-              title: _productController.titleController.text.trim()
-                  .toLowerCase(),
-              description: _productController.descriptinController.text
-                  .trim()
-                  .toString()
-                  .toLowerCase(),
-              price: double.parse(
-                  _productController.priceController.text.trim()),
-              amount: int.parse(
-                  _productController.amountController.text.trim()),
-              is_display: true,
-              tag: _productController.tagController.text.trim().toLowerCase(),
-              is_favorites: false));
-          _productController.getAllProducts();
+        _productController.addProduct(Product(
+            picture:
+                'https://assets.ajio.com/medias/sys_master/root/h6b/hbb/15281228087326/-473Wx593H-461089583-grey-MODEL.jpg',
+            title: _productController.titleController.text.trim().toLowerCase(),
+            description: _productController.descriptinController.text
+                .trim()
+                .toString()
+                .toLowerCase(),
+            price: double.parse(_productController.priceController.text.trim()),
+            amount: int.parse(_productController.amountController.text.trim()),
+            is_display: true,
+            tag: _productController.tagController.text.trim().toLowerCase(),
+            is_favorites: false));
+        _productController.getAllProducts();
       },
       child: titleSave(),
     );
@@ -174,7 +170,7 @@ class AddProductAdminScreen extends StatelessWidget {
 
   Text titleSave() {
     return Text(
-      'Save',
+      'save'.tr,
       style: TextStyle(
         color: Colors.white,
         decoration: TextDecoration.underline,

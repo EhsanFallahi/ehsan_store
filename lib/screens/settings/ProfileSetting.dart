@@ -1,12 +1,16 @@
+import 'package:ehsan_store/controller/login_controller/LoginController.dart';
+import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileSetting extends StatelessWidget {
-  bool _isSelected = false;
+  LoginController get _loginController => Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<LoginController>(() => LoginController());
     final appBar = AppBar(
       centerTitle: true,
       elevation: 0,
@@ -16,7 +20,7 @@ class ProfileSetting extends StatelessWidget {
     );
     return Scaffold(
       appBar: appBar,
-      body: mainBody(context),
+      body: Obx(() => mainBody(context)),
     );
   }
 
@@ -26,7 +30,7 @@ class ProfileSetting extends StatelessWidget {
       child: Column(
         children: [
           HeaderWithoutSearch(
-            title: 'Setting',
+            title: 'setting'.tr,
           ),
           Column(
             children: [
@@ -37,28 +41,8 @@ class ProfileSetting extends StatelessWidget {
             ],
           ),
           editProfileItem(),
-          logoutItem(),
         ],
       ),
-    );
-  }
-
-  SizedBox logoutItem() {
-    return SizedBox(
-      width: 140,
-      height: 30,
-      child: logoutButton(),
-    );
-  }
-
-  OutlineButton logoutButton() {
-    return OutlineButton(
-      textColor: Colors.white,
-      color: Colors.blue,
-      child: Text('Log Out'),
-      onPressed: () {},
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      borderSide: BorderSide(color: Color(0xfF0496E2), width: 2),
     );
   }
 
@@ -74,7 +58,7 @@ class ProfileSetting extends StatelessWidget {
       height: 40,
       width: 140,
       child: ElevatedButton(
-        child: Text('Edit Profile'),
+        child: Text('edit_profile'.tr),
         onPressed: () {},
         style: buttonStyle(),
       ),
@@ -108,7 +92,7 @@ class ProfileSetting extends StatelessWidget {
 
   Column selectEnItem(BuildContext context) {
     return Column(
-      children: [titleEN(), handleBoxDecoration(context)],
+      children: [titleEN(), enHandleBoxDecoration(context)],
     );
   }
 
@@ -116,7 +100,7 @@ class ProfileSetting extends StatelessWidget {
     return Column(
       children: [
         titleFA(),
-        handleBoxDecoration(context),
+        faHandleBoxDecoration(context),
       ],
     );
   }
@@ -129,20 +113,50 @@ class ProfileSetting extends StatelessWidget {
     );
   }
 
-  GestureDetector handleBoxDecoration(BuildContext context) {
+  GestureDetector faHandleBoxDecoration(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        _loginController.faCheckBoxSelected.value = true;
+        _loginController.enCheckBoxSelected.value = false;
+      },
       child: Container(
           width: 30,
           height: 30,
           decoration: BoxDecoration(
-              color: _isSelected
+              color: _loginController.faCheckBoxSelected.value
                   ? Theme.of(context).accentColor
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(5),
-              border: _isSelected
+              border: _loginController.faCheckBoxSelected.value
                   ? null
                   : Border.all(color: Theme.of(context).accentColor, width: 2)),
-          child: _isSelected
+          child: _loginController.faCheckBoxSelected.value
+              ? Icon(
+                  Icons.check,
+                  color: Colors.white,
+                )
+              : null),
+    );
+  }
+
+  GestureDetector enHandleBoxDecoration(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _loginController.faCheckBoxSelected.value = false;
+        _loginController.enCheckBoxSelected.value = true;
+      },
+      child: Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+              color: _loginController.enCheckBoxSelected.value
+                  ? Theme.of(context).accentColor
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(5),
+              border: _loginController.enCheckBoxSelected.value
+                  ? null
+                  : Border.all(color: Theme.of(context).accentColor, width: 2)),
+          child: _loginController.enCheckBoxSelected.value
               ? Icon(
                   Icons.check,
                   color: Colors.white,
@@ -161,7 +175,7 @@ class ProfileSetting extends StatelessWidget {
 
   Text titleLanguage() {
     return Text(
-      'Language :',
+      'language'.tr,
       style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
@@ -174,9 +188,14 @@ class ProfileSetting extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(4),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          _loginController.faCheckBoxSelected.value
+              ? Get.updateLocale(Locale('fa', 'IR'))
+              : Get.updateLocale(Locale('en', 'US'));
+          Get.to(DashboardScreen());
+        },
         child: Text(
-          'Save',
+          'save'.tr,
           style: TextStyle(
             color: Colors.white,
             decoration: TextDecoration.underline,
@@ -192,9 +211,11 @@ class ProfileSetting extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(4),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.off(() => DashboardScreen());
+        },
         child: Text(
-          'Cancel',
+          'cancel'.tr,
           style: TextStyle(
             color: Colors.white,
             decoration: TextDecoration.underline,

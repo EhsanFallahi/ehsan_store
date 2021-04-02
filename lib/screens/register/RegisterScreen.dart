@@ -10,11 +10,10 @@ import 'package:get/get.dart';
 
 class RegisterationScreen extends StatelessWidget {
   RegisterController get _registerController => Get.find<RegisterController>();
-  // LoginController get _registerController => Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<RegisterController>(() =>RegisterController());
+    Get.lazyPut<RegisterController>(() => RegisterController());
 
     return Scaffold(body: mainBody(context));
   }
@@ -56,7 +55,7 @@ class RegisterationScreen extends StatelessWidget {
 
   ElevatedButton registerButton() {
     return ElevatedButton(
-      child: Text('Register'),
+      child: Text('register'.tr),
       style: buttonStyle(),
       onPressed: () {
         if (_registerController.formKey.currentState.validate()) {
@@ -107,10 +106,10 @@ class RegisterationScreen extends StatelessWidget {
       style: TextStyle(color: Color(0xfF0496E2)),
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'please_enter_some_text'.tr;
         }
         if (value.length < 6) {
-          return 'Must be more than 6 charater';
+          return 'must_be_more_than_6_character'.tr;
         } else
           return null;
       },
@@ -121,7 +120,7 @@ class RegisterationScreen extends StatelessWidget {
   InputDecoration confirmPasswordinputDecoration() {
     return InputDecoration(
       enabledBorder: outlineInputBorder(),
-      labelText: 'Confirm Password',
+      labelText: 'confirm_password'.tr,
     );
   }
 
@@ -143,10 +142,10 @@ class RegisterationScreen extends StatelessWidget {
       style: TextStyle(color: Color(0xfF0496E2)),
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'please_enter_some_text'.tr;
         }
         if (value.length < 6) {
-          return 'Must be more than 6 charater';
+          return 'must_be_more_than_6_character'.tr;
         } else
           return null;
       },
@@ -157,7 +156,7 @@ class RegisterationScreen extends StatelessWidget {
   InputDecoration inputDecoration(BuildContext context) {
     return InputDecoration(
         enabledBorder: outlineInputBorder(),
-        labelText: 'Password',
+        labelText: 'password'.tr,
         suffixIcon: visibilityIconButton(context));
   }
 
@@ -194,7 +193,7 @@ class RegisterationScreen extends StatelessWidget {
         alignment: Alignment.center,
         padding: EdgeInsets.all(10),
         child: Text(
-          'Register',
+          'register'.tr,
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

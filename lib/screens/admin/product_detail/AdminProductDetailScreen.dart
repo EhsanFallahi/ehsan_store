@@ -44,7 +44,7 @@ class AdminProductDetailScreen extends StatelessWidget {
               decoration: gradientBackground(),
               child: Stack(children: [
                 HeaderWithoutSearch(
-                  title: 'Product Details',
+                  title: 'product_details'.tr,
                 ),
                 Positioned(
                   top: 80,
@@ -84,7 +84,7 @@ class AdminProductDetailScreen extends StatelessWidget {
         onPressed: () {
           Get.to(AddProductAdminScreen());
         },
-        label: Text('Add Product'),
+        label: Text('add_product'.tr),
         icon: Icon(Icons.add, color: Colors.white),
       ),
     );

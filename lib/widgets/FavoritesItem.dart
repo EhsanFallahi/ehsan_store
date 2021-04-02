@@ -32,15 +32,7 @@ class FavoritesItem extends StatelessWidget {
         children: [
           Container(
             height: 190,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.white60,
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0xfF0496E2),
-                      blurRadius: 25,
-                      offset: Offset(4, 0))
-                ]),
+            decoration: mainBoxDecoration(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -60,6 +52,16 @@ class FavoritesItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  BoxDecoration mainBoxDecoration() {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white60,
+        boxShadow: [
+          BoxShadow(
+              color: Color(0xfF0496E2), blurRadius: 25, offset: Offset(4, 0))
+        ]);
   }
 
   Column columnItemsView() {
@@ -115,22 +117,29 @@ class FavoritesItem extends StatelessWidget {
       child: Container(
         width: 100,
         height: 160,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              8,
-            ),
-            color: Colors.white60,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black45, blurRadius: 10, offset: Offset(0, 6))
-            ]),
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              picture,
-              fit: BoxFit.fill,
-            )),
+        decoration: imageBoxDecoration(),
+        child: clipRRect(),
       ),
     );
+  }
+
+  ClipRRect clipRRect() {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.network(
+          picture,
+          fit: BoxFit.fill,
+        ));
+  }
+
+  BoxDecoration imageBoxDecoration() {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          8,
+        ),
+        color: Colors.white60,
+        boxShadow: [
+          BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 6))
+        ]);
   }
 }
