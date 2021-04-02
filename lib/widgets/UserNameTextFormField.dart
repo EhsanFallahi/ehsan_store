@@ -1,3 +1,4 @@
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:flutter/material.dart';
 
 class UserNameTextFormField extends StatelessWidget {
@@ -7,7 +8,7 @@ class UserNameTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+      padding: PADDING_TEXTFORFIELD,
       child: TextFormField(
         style: TextStyle(color: Color(0xfF0496E2)),
         autovalidateMode: AutovalidateMode.onUserInteraction,

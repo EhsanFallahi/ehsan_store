@@ -18,3 +18,5 @@ void showCustomSnackBar(String title,String subtitle) =>
         margin: EdgeInsets.all(8),
         colorText: Theme.of(Get.context).accentColor,
         backgroundColor: Colors.black87.withOpacity(0.8));
+
+const PADDING_TEXTFORFIELD=EdgeInsets.only(left: 15, right: 15, top: 15);

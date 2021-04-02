@@ -1,8 +1,8 @@
 import 'dart:html';
-
 import 'package:ehsan_store/controller/login_controller/LoginController.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:ehsan_store/screens/register/RegisterScreen.dart';
+import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/UserNameTextFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -112,7 +112,7 @@ class LoginScreen extends StatelessWidget {
 
   Container passwordTextFormField(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+      padding: PADDING_TEXTFORFIELD,
       child: Obx(
         () => TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,

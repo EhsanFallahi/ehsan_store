@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:ehsan_store/controller/product_contoller/ProductController.dart';
 import 'package:ehsan_store/data_source/model/product/Product.dart';
 import 'package:ehsan_store/screens/bottom_sheet/PopUp.dart';
@@ -88,7 +86,7 @@ class DashboardScreen extends StatelessWidget {
           Icons.search_rounded,
           color: Colors.white,
         ),
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: SECONDARY_COLOR,
         onPressed: () {
           _handlerBottomSheet(context);
         });
@@ -218,14 +216,7 @@ class DashboardScreen extends StatelessWidget {
       child: Container(
           width: 30,
           height: 30,
-          decoration: BoxDecoration(
-              color: _isSelected
-                  ? Theme.of(context).accentColor
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(5),
-              border: _isSelected
-                  ? null
-                  : Border.all(color: Theme.of(context).accentColor, width: 2)),
+          decoration: squareBoxDecoration(context),
           child: _isSelected
               ? Icon(
                   Icons.check,
@@ -235,29 +226,46 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
+  BoxDecoration squareBoxDecoration(BuildContext context) {
+    return BoxDecoration(
+        color: _isSelected ? Theme.of(context).accentColor : Colors.transparent,
+        borderRadius: BorderRadius.circular(5),
+        border: _isSelected
+            ? null
+            : Border.all(color: Theme.of(context).accentColor, width: 2));
+  }
+
   Container searchTextField(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-      child: TextFormField(
-        style: TextStyle(color: Color(0xfF0496E2)),
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        // controller: nameController,
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'please_enter_some_text'.tr;
-          } else
-            return null;
-        },
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide:
-                BorderSide(color: Theme.of(context).accentColor, width: 3),
-          ),
-          labelText: 'the_desired_word'.tr,
-        ),
-      ),
+      child: searchTextFormField(context),
     );
+  }
+
+  TextFormField searchTextFormField(BuildContext context) {
+    return TextFormField(
+      style: TextStyle(color: Color(0xfF0496E2)),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      // controller: nameController,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'please_enter_some_text'.tr;
+        } else
+          return null;
+      },
+      decoration: searchInputDecoration(context),
+    );
+  }
+
+  InputDecoration searchInputDecoration(BuildContext context) {
+    return InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide:
+              BorderSide(color: Theme.of(context).accentColor, width: 3),
+        ),
+        labelText: 'the_desired_word'.tr,
+      );
   }
 
   Center priceRangeItem() {

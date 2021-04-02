@@ -28,13 +28,7 @@ class AddAdminScreen extends StatelessWidget {
 
   Container mainBody(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[Color(0xfF000000), Color(0xfF474546)],
-          ),
-        ),
+        decoration: gradientBackground(),
         child: Form(
           key: _adminController.adminFormKey,
           child: SingleChildScrollView(
@@ -158,7 +152,7 @@ class PasswordTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+      padding: PADDING_TEXTFORFIELD,
       child: Obx(
         () => TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
