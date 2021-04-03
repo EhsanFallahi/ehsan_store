@@ -130,7 +130,7 @@ class ProductEditScreen extends StatelessWidget {
               children: [
                 titleDescriptionPriceItems(),
                 visibiliteAndDeleteItem(context),
-                amountCounterItem(context),
+                amountCounterItem(context)
               ],
             ),
           ),
@@ -139,43 +139,52 @@ class ProductEditScreen extends StatelessWidget {
     );
   }
 
+  Flexible amountCounterItem(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Theme.of(context).accentColor,
+              borderRadius: BorderRadius.circular(12)),
+          child: containerAmountCounter(),
+        ),
+      ),
+    );
+  }
+
+  Flexible visibiliteAndDeleteItem(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          deleteIconButton(context),
+          visibilityIconButton(context),
+        ],
+      ),
+    );
+  }
+
+  Flexible titleDescriptionPriceItems() {
+    return Flexible(
+      flex: 3,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            titleItem(),
+            descriptionItem(),
+            priceItem(),
+          ]),
+    );
+  }
+
   BoxDecoration boxDecoration(BuildContext context) {
     return BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).primaryColor.withOpacity(0.8));
-  }
-
-  Column titleDescriptionPriceItems() {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          titleItem(),
-          descriptionItem(),
-          priceItem(),
-        ]);
-  }
-
-  Column visibiliteAndDeleteItem(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        deleteIconButton(context),
-        visibilityIconButton(context),
-      ],
-    );
-  }
-
-  Padding amountCounterItem(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).accentColor,
-            borderRadius: BorderRadius.circular(12)),
-        child: containerAmountCounter(),
-      ),
-    );
   }
 
   Container containerAmountCounter() {

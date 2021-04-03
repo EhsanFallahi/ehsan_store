@@ -38,6 +38,7 @@ class CartScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: _productController.tempListCarts.length,
                 itemBuilder: (context, i) => CartItem(
+                  id: _productController.tempListCarts[i].id,
                   picture: _productController.tempListCarts[i].picture,
                   title: _productController.tempListCarts[i].title,
                   price: _productController.tempListCarts[i].price,

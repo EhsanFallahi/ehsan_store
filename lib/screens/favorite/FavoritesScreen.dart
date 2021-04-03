@@ -13,7 +13,12 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<ProductController>(() => ProductController());
-    return Scaffold(body: mainBody(context));
+    final appBar = AppBar(
+      centerTitle: true,
+      elevation: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+    );
+    return Scaffold(appBar:appBar,body: mainBody(context));
   }
 
   Obx mainBody(BuildContext context) {

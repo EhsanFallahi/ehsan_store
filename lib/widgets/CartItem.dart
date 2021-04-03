@@ -46,8 +46,13 @@ class CartItem extends StatelessWidget {
         color: Colors.black87,
       ),
       onPressed: () {
-        _productController.deleteCart(
-            Cart(picture: picture, title: title, price: price, amount: amount));
+        _productController.deleteCart(Cart(
+            id: id,
+            picture: picture,
+            title: title,
+            price: price,
+            amount: amount));
+        _productController.getAllCarts();
       },
     );
   }

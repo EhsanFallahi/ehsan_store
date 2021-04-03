@@ -1,4 +1,6 @@
+import 'package:ehsan_store/controller/lang_controller/LanguageController.dart';
 import 'package:ehsan_store/controller/login_controller/LoginController.dart';
+import 'package:ehsan_store/data_source/model/lang/Language.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'package:ehsan_store/util/Constant.dart';
 import 'package:ehsan_store/widgets/HeaderWithoutSearch.dart';
@@ -8,9 +10,12 @@ import 'package:get/get.dart';
 class ProfileSetting extends StatelessWidget {
   LoginController get _loginController => Get.find<LoginController>();
 
+  LanguageController get _lanaguageController => Get.find<LanguageController>();
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<LoginController>(() => LoginController());
+    Get.lazyPut<LanguageController>(() => LanguageController());
     final appBar = AppBar(
       centerTitle: true,
       elevation: 0,
@@ -189,10 +194,19 @@ class ProfileSetting extends StatelessWidget {
       padding: EdgeInsets.all(4),
       child: TextButton(
         onPressed: () {
-          _loginController.faCheckBoxSelected.value
-              ? Get.updateLocale(Locale('fa', 'IR'))
-              : Get.updateLocale(Locale('en', 'US'));
-          Get.to(DashboardScreen());
+          if (_loginController.faCheckBoxSelected.value) {
+            Get.updateLocale(Locale('fa', 'IR'));
+            _lanaguageController.updateLanguage(Language(id: 1, en: false));
+            showCustomSnackBar('Changed Language',
+                'The language of the application was changed to Persian');
+            Get.to(DashboardScreen());
+          } else {
+            Get.updateLocale(Locale('en', 'US'));
+            _lanaguageController.updateLanguage(Language(id: 1, en: true));
+            Get.to(DashboardScreen());
+            showCustomSnackBar('Changed Language',
+                'The language of the application was changed to English');
+          }
         },
         child: Text(
           'save'.tr,

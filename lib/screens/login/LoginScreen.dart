@@ -129,29 +129,33 @@ class LoginScreen extends StatelessWidget {
             } else
               return null;
           },
-          decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white70, width: 3),
-              ),
-              labelText: 'password'.tr,
-              suffixIcon: IconButton(
-                  icon: Obx(
-                    () => Icon(
-                      // Based on passwordVisible state choose the icon
-                      _loginController.changeDisplayPassword.value
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  onPressed: () {
-                    _loginController.changeDisplayPassword.value =
-                        !_loginController.changeDisplayPassword.value;
-                  })),
+          decoration: passwordInputDecoration(context),
         ),
       ),
     );
+  }
+
+  InputDecoration passwordInputDecoration(BuildContext context) {
+    return InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.white70, width: 3),
+            ),
+            labelText: 'password'.tr,
+            suffixIcon: IconButton(
+                icon: Obx(
+                  () => Icon(
+                    // Based on passwordVisible state choose the icon
+                    _loginController.changeDisplayPassword.value
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                onPressed: () {
+                  _loginController.changeDisplayPassword.value =
+                      !_loginController.changeDisplayPassword.value;
+                }));
   }
 
   Container logoItem() {

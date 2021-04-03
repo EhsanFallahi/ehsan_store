@@ -12,7 +12,7 @@ class AdminProductController extends GetxController {
 
   dynamic _selectedProduct = Product().obs;
   var tempSelectedProduct = Product().obs;
-  RxInt amountCounter = 0.obs;
+  RxInt amountCounter = 1.obs;
   RxBool isLoading = false.obs;
   RxBool changeDisplayProduct = true.obs;
 

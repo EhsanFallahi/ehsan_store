@@ -1,4 +1,3 @@
-import 'package:ehsan_store/data_source/model/admin/Admin.dart';
 import 'package:ehsan_store/data_source/model/user/User.dart';
 import 'package:ehsan_store/data_source/repository/login/LoginRepository.dart';
 import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
@@ -12,7 +11,7 @@ class RegisterController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
 
   RxBool changeDisplayPassword = false.obs;
   RxBool isLoading = false.obs;
@@ -44,3 +43,4 @@ class RegisterController extends GetxController {
     confirmPasswordController.text = '';
   }
 }
+

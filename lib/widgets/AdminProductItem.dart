@@ -86,21 +86,27 @@ class AdminProductItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              titleItem(),
-              descriptionItem(),
-              priceItem(),
-            ]),
+        Flexible(
+          flex: 3,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                titleItem(),
+                descriptionItem(),
+                priceItem(),
+              ]),
+        ),
         tagItem(),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            handelAmountColor(),
-            amountItem(context),
-          ],
+        Flexible(
+          flex: 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              handelAmountColor(),
+              amountItem(context),
+            ],
+          ),
         )
       ],
     );

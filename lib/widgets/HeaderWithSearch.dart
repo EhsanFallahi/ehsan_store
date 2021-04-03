@@ -66,7 +66,7 @@ class HeaderWithSearch extends StatelessWidget {
 
   Container headerItem(BuildContext context) {
     return Container(
-      height: size.height * 0.2 - 28,
+      height: size.height * 0.2 - 50,
       decoration: headerBoxDecoration(context),
       child: Center(
         child: Padding(

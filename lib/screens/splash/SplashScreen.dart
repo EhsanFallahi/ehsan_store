@@ -25,12 +25,12 @@ class SplashScreen extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       child: Image.asset('images/ehsan.png'),
-                    width: 140,
-                    height: 140,
+                    width: 180,
+                    height: 180,
                   ),
                   titleEhsanStore(),
                 ],

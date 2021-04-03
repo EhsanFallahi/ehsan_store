@@ -90,7 +90,7 @@ class RegisterationScreen extends StatelessWidget {
 
   Container confirmPasswordTextFormField() {
     return Container(
-      padding:PADDING_TEXTFORFIELD,
+      padding: PADDING_TEXTFORFIELD,
       child: Obx(
         () => confirmPasswordTextForm(),
       ),
@@ -126,7 +126,7 @@ class RegisterationScreen extends StatelessWidget {
 
   Container passwordTextFieldForm(BuildContext context) {
     return Container(
-      padding:PADDING_TEXTFORFIELD,
+      padding: PADDING_TEXTFORFIELD,
       child: Obx(
         () => passwordTextForm(context),
       ),

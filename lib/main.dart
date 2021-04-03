@@ -1,3 +1,4 @@
+import 'package:ehsan_store/controller/lang_controller/LanguageController.dart';
 import 'package:ehsan_store/screens/admin/add_admin/AddAdminScreen.dart';
 import 'package:ehsan_store/screens/admin/add_product/AddProductAdminScreen.dart';
 import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';

@@ -12,7 +12,6 @@ class Favorites {
     this.title,
     this.description,
     this.price,
-
     this.is_favorites});
 
   void fromJson(dynamic json) {

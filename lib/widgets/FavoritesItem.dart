@@ -2,6 +2,8 @@ import 'package:ehsan_store/controller/product_contoller/ProductController.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../data_source/model/favorites/Favorites.dart';
+
 class FavoritesItem extends StatelessWidget {
   ProductController get _productController => Get.find<ProductController>();
   int id;
@@ -31,20 +33,15 @@ class FavoritesItem extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: 190,
+            height: 200,
             decoration: mainBoxDecoration(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   imageItem(),
-                  Expanded(
-                    flex: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: columnItemsView(),
-                    ),
-                  )
+                  titleAndDescriptionAndPriceViews(),
+                  deleteItem(),
                 ],
               ),
             ),
@@ -52,6 +49,39 @@ class FavoritesItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Expanded titleAndDescriptionAndPriceViews() {
+    return Expanded(
+      flex: 3,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: columnItemsView(),
+      ),
+    );
+  }
+
+  IconButton deleteItem() {
+    return deleteIconButton();
+  }
+
+  IconButton deleteIconButton() {
+    return IconButton(
+    icon: Icon(
+      Icons.delete_forever_rounded,
+      color: Colors.black87,
+    ),
+    onPressed: () {
+      _productController.deleteFavorites(Favorites(
+          id: id,
+          picture: picture,
+          title: title,
+          description: description,
+          price: price,
+          is_favorites: is_favorites));
+      _productController.getAllFavorites();
+    },
+  );
   }
 
   BoxDecoration mainBoxDecoration() {
