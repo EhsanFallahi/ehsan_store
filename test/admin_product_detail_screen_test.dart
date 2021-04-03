@@ -1,19 +1,8 @@
-import 'package:ehsan_store/main.dart';
 import 'package:ehsan_store/screens/admin/product_detail/AdminProductDetailScreen.dart';
-import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
 import 'dart:html';
-import 'package:ehsan_store/screens/login/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ehsan_store/main.dart';
-import 'package:ehsan_store/screens/dashboard/DashboardScreen.dart';
-import 'dart:html';
-import 'package:ehsan_store/screens/login/LoginScreen.dart';
-import 'package:ehsan_store/screens/product_detail/ProductDetailScreen.dart';
-import 'package:favorite_button/favorite_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('tester', (WidgetTester tester) async {
